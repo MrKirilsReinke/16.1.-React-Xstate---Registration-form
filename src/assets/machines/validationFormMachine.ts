@@ -6,11 +6,17 @@ const validationFormMachine = createMachine({
   predictableActionArguments: true,
   preserveActionOrder: true,
   initial: 'Loading form',
-  schema: {
-    events: {} as
-      | { type: 'Form loaded' }
-      | { type: 'Form loading failed' }
-      | { type: 'Create new username' }
+  schema: 
+  {
+    // events: {} as
+    //   | { type: 'Form loaded' }
+    //   | { type: 'Form loading failed' }
+    //   | { type: 'Create new username' }
+    services: {} as {
+      'loadForm': {
+        data: void
+      }
+    }
   },
   tsTypes: {} as import('./validationFormMachine.typegen').Typegen0,
   states: {

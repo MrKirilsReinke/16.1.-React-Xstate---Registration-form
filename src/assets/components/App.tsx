@@ -8,7 +8,7 @@ function App() {
   const [currentState, send] = useMachine(validationFormMachine, {
     services: {
       loadForm: async () => {
-        throw new Error('heeey'),
+        // throw new Error('heeey'),
         console.log('form is loaded');
       }
     },
