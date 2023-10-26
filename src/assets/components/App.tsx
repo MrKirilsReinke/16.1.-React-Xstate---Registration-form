@@ -19,12 +19,17 @@ function App() {
     <div className="bg-gray-900 py-16 sm:py-24 h-screen">
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 shadow-xl sm:rounded-3xl sm:px-24 xl:py-32">
+          {currentState.matches('Loading form') && (
+            <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Loading....
+            </h2>
+          )}
+
           {currentState.matches('Form loaded') && (
             <div className="grid grid-flow-row gap-10 justify-center">
               <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 Press "Start" button to begin registration
               </h2>
-
               <button
                 type="button"
                 className="place-self-center w-[150px] rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
