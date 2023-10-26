@@ -1,5 +1,7 @@
 import { useMachine } from '@xstate/react';
+// import UsernameInput from './FormInput/UsernameInput';
 import EmailInput from './FormInput/EmailInput';
+// import PhoneNumberInput from './FormInput/PhoneNumberInput';
 import validationFormMachine from '../machines/validationFormMachine';
 
 import Svg from '../images/Svg';
