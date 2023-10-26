@@ -46,10 +46,10 @@ function App() {
             </div>
           )}
 
-          {currentState.matches('Creating new username.Showing username form input') && (
+          {currentState.matches('Creating new username') && (
             <div>
               <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Current step
+                Current step:
               </h2>
               <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
                 {JSON.stringify(currentState.value)}
