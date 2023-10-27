@@ -2,7 +2,7 @@ import { createMachine, assign } from 'xstate';
 
 const validationFormMachine = createMachine(
   {
-    /** @xstate-layout N4IgpgJg5mDOIC5QDcCGAbAlhVAXTA9gHYBiBATgLYCyqAxgBaZFgB0AMgahM1AAQAzCpQDEEYm2bICAazZosOfMTJVajZm07deg4QikE6eQkQDaABgC6lq4lAAHArEzKi9kAA9EAJgAsFqx+fgAcAJwhfj4WAMwxAKwAbGFhADQgAJ6IAIwhIawA7DEW2RZ+BQU+iVUh8QC+dekK2CYqwupMLBxcPET8QlQiYOTkFKwO6HgDlKzNSqaqNPSdWj260wZE0sZutrYeTi5uHt4IkazxYdkxIQUWBbeR4elZCD7xMaw1iRWJFldFMoNJoYFpuRYdTSsRZ8dA9SAiADC5DAeDAfBYAHc+ABXWDDIioShgfZIECHVymE6IJI+VjZRLxMrvaLXRIvXxJVgAsrheI+SIFbL1RogOatUjtZZQ5Go-B9DFgbF4glEtgAZQYBExuhV5EJxL0VD4zAcONwIgAqvj9Wq+ABJIhm3B8RioPqQUmOZyU4jUhCJEKJL7xEIxYUFRLZMI+NKZRBRz4hHyx+6Riw+GIphqiogECBwDzi8FSjQsA4+45k04AWmyfnpd3id38MUSP2C2Q5b3i3LK8VywvK8WCPgKwLFoPmbTU0q62l6-WEFaOVOriCi3ey1y+Y6i8VDBQ+UZ8E+LC1LK2hwlh8IgK997nXCD8WYuWeyQqq+788S3QdYPJI2bflSgFM8pwlCE5zYWUTAVLFcRtA0wAfKtQFOX8CkAm5rlqBJI1jPxuxiIpWBiFJEj8T8Pn8aMIMUKDLxlFF4P4RC9RQ1hNW1XVkLtaYTSdc00LXDCaQsXswxCPCPmbaowmI+MXz+QoU0uI9-kqZs-AYsEL1nMs2BhOEdAVYZRhRe8yQpdCvEQOJAKI2Mj0SOJ3nZZSKODflAyo0jrjbEUGiAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QDcCGAbAlhVAXTA9gHYBiBATgLYCyqAxgBaZFgB0AZhZQDIGoSQAxAGEASgFEAggBVxAfQBy4gOpyAqgGVxohZOriA2gAYAuolAAHArEz5i5kAA9EAWgCMAZgBMrAJwAOADY3AFYQ-18Q3y9orwAaEABPRF9fViD-AHZfTKijfzc3Lw8AXxKEtCwcO1IuWkZmNjAiXDByZig1WDaFVEowQXEFWVEASQUAcXUtUUU9Q1MHKxsah2cEN18PVi8vEIAWTP39o28wrYTkhBd9wL8vDN9AowOjNxeyioxsPEJaqnqTBYrGarXaRE63XIvX6gg0agAQtRRtJpto5vpjGYkCBlrY-mtEB5Aj4vJkSYF-P4QjF-F5DpcUmkMtlcr58oV6Z8QJUfjUyAD6ECmi02h1xJRUJh0INhtpxlNxNRJKNuHJJAARDUSDQaLFLaz4+w49aBdmsTJeTweLL5AIhQKMhAhNysNyBDxFYpBek2h3c3nVP4CmhCxog0XgqASqUy+FIlFyJUqtWa7XiXX6nF41YmxAhI5+d77A5eIz7IoeTJO3ZGN2pEs5d0eSKRAPfIPEEOA8OgsUQgAKDGIYAUAFdKAAjNqykYKuQDgASAHklIo1NQEdos5ZDbnQOsPC9WFFiVSXc8ng6nVXXR4PBejEZMm9Am-21Vfl26mHgX2o0OI7jlOM7xsiqJLqu8gKBuW6iDuuJ7gSebXPSrCHIEIQvHslokm4DJJIgbh0js+HEUebz+HaXhlOUIBEAQAjwDigZfv8oYNCwBorMhB6uPeaS5LcVpuJkESnG4TruB4+ysFWjy3OELy+B+fLBj+nFsJwVC8PwkDcUaRCEqhviukJeGieJnpOqkFpiWJBZGA8VrBKpnbsT2f6Rh0XQ9H0YAGfuThEfsgm+CcHo5KF7LxIRCC2Zk9mZDaLyHA2blsd2v4imC4qStKgW8cFCB4aw+TZN4-gyfsMS+E6+GZOh2H5HST63IlGX8hpwoRrlg7DiwwHTuQhXGnxCAPmkXiUuSxIVslZYhDWhzoeSRy5EeIRVoE+y0SUQA */
     id: 'validationFormMachine',
     predictableActionArguments: true,
     preserveActionOrder: true,
@@ -33,7 +33,7 @@ const validationFormMachine = createMachine(
       createEmailFormInput: '',
       createPhoneNumberFormInput: 0
     },
-    // tsTypes: {} as import('./validationFormMachine.typegen').Typegen0,
+    tsTypes: {} as import('./validationFormMachine.typegen').Typegen0,
     states: {
       // 'Loading form': {
       //   invoke: {
@@ -88,17 +88,16 @@ const validationFormMachine = createMachine(
             target: ''
           }
         }
-      },
-      'Form loading errored': {}
+      }
     }
   },
   {
     actions: {
-      assignErrorToContext: assign((context, event) => {
-        return {
-          errorMessage: (event.data as Error).message
-        };
-      }),
+      // assignErrorToContext: assign((context, event) => {
+      //   return {
+      //     errorMessage: (event.data as Error).message
+      //   };
+      // }),
       assignUserNameFormInputToContext: assign((context, event) => {
         return {
           createUsernameFormInput: event.value

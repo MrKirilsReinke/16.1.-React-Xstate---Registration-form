@@ -3,16 +3,17 @@ import { useMachine } from '@xstate/react';
 // import EmailInput from './FormInput/EmailInput';
 // import PhoneNumberInput from './FormInput/PhoneNumberInput';
 import validationFormMachine from '../machines/validationFormMachine';
+import FormInput from './FormInput';
 
 import Svg from '../images/Svg';
 
 function App() {
   const [currentState, send] = useMachine(validationFormMachine, {
     services: {
-      loadForm: async () => {
-        // throw new Error('heeey'),
-        console.log('form is loaded');
-      }
+      // loadForm: async () => {
+      //   // throw new Error('heeey'),
+      //   console.log('form is loaded');
+      // }
     },
     devTools: true
   });
@@ -49,16 +50,18 @@ function App() {
             >  
           )} */}
 
-          {currentState.matches('enteringUserName') && (
-            <div>
-              <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          {/* {currentState.matches('enteringUserName') && ( */}
+          <div>
+            <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 Current step:
-              </h2>
-              <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
-                {JSON.stringify(currentState.value)}
-              </p>
-              <pre>{JSON.stringify(currentState.context)}</pre>
-              <input
+            </h2>
+            <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
+              {JSON.stringify(currentState.value)}
+            </p>
+            <pre>{JSON.stringify(currentState.context)}</pre>
+
+
+            {/* <input
                 id="username"
                 name="username"
                 type="text"
@@ -71,22 +74,36 @@ function App() {
                     value: e.target.value
                   });
                 }}
+              /> */}
+            {currentState.matches('enteringUserName') && (
+              <FormInput
+                placeholder="My Username"
+
+                onChange={(type, e) => {
+                  send({
+                    type: 'ENTERING_USER_NAME',
+                    value: e.target.value
+                  });
+                }}
               />
-              <Svg />
-              <div className="grid gap-10 w-[300px] m-auto mt-10">
-                <button
-                  onClick={() => {
-                    send({
-                      type: 'SUBMIT_USER_NAME'
-                    });
-                  }}
-                  type="button"
-                  className="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20 right-0">
+            )}
+
+
+            <Svg />
+            <div className="grid gap-10 w-[300px] m-auto mt-10">
+              <button
+                onClick={() => {
+                  send({
+                    type: 'SUBMIT_USER_NAME'
+                  });
+                }}
+                type="button"
+                className="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20 right-0">
                   Next
-                </button>
-              </div>
+              </button>
             </div>
-          )}
+          </div>
+          {/* )} */}
 
           {currentState.matches('enteringEmail') && (
             <div>
@@ -114,11 +131,11 @@ function App() {
               <Svg />
               <div className="grid grid-cols-2 gap-10 w-[300px] m-auto mt-10">
                 <button
-                  onClick={() => {
-                    send({
-                      type: 'SUBMIT_USER_NAME'
-                    });
-                  }}
+                  // onClick={() => {
+                  //   send({
+                  //     type: 'SUBMIT_EMAIL_ADDRESS'
+                  //   });
+                  // }}
                   type="button"
                   className="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20 right-0">
                   Back
@@ -164,11 +181,11 @@ function App() {
               <Svg />
               <div className="grid grid-cols-2 gap-10 w-[300px] m-auto mt-10">
                 <button
-                  onClick={() => {
-                    send({
-                      type: 'SUBMIT_USER_NAME'
-                    });
-                  }}
+                  // onClick={() => {
+                  //   send({
+                  //     type: 'SUBMIT_USER_NAME'
+                  //   });
+                  // }}
                   type="button"
                   className="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20 right-0">
                   Back
@@ -177,7 +194,7 @@ function App() {
                 <button
                   onClick={() => {
                     send({
-                      type: 'SUBMIT_EMAIL_ADDRESS'
+                      type: 'SUBMIT_PHONE_NUMBER'
                     });
                   }}
                   type="button"

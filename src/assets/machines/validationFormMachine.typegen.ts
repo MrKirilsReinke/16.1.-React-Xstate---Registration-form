@@ -16,7 +16,9 @@
           services: never;
         };
         eventsCausingActions: {
-          "assignUserNameFormInputToContext": "Username Input changed";
+          "assignEmailFormInputToContext": "ENTERING_EMAIL_ADDRESS";
+"assignPhoneNumberFormInputToContext": "ENTERING_PHONE_NUMBER";
+"assignUserNameFormInputToContext": "ENTERING_USER_NAME";
         };
         eventsCausingDelays: {
           
@@ -27,7 +29,7 @@
         eventsCausingServices: {
           
         };
-        matchesStates: "Creating new username" | "Creating new username.Showing username form input" | "Form loading errored" | "formLoaded" | { "Creating new username"?: "Showing username form input"; };
+        matchesStates: "enteringEmail" | "enteringPhoneNumber" | "enteringUserName" | "formLoaded";
         tags: never;
       }
   
