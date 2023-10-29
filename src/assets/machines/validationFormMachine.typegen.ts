@@ -19,6 +19,7 @@
           "assignEmailFormInputToContext": "ENTERING_EMAIL_ADDRESS";
 "assignPhoneNumberFormInputToContext": "ENTERING_PHONE_NUMBER";
 "assignUserNameFormInputToContext": "ENTERING_USER_NAME";
+"clearInputFields": "SUBMIT_FORM_COMPLETION";
         };
         eventsCausingDelays: {
           
@@ -29,7 +30,7 @@
         eventsCausingServices: {
           
         };
-        matchesStates: "enteringEmail" | "enteringPhoneNumber" | "enteringUserName" | "formLoaded";
+        matchesStates: "enteringEmail" | "enteringPhoneNumber" | "enteringUserName" | "formCompletion" | "formLoaded" | "formSubmitted";
         tags: never;
       }
   

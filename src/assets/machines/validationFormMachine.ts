@@ -17,13 +17,14 @@ const validationFormMachine = createMachine(
         | { type: 'ENTERING_PHONE_NUMBER'; value: number }
         | { type: 'SUBMIT_PHONE_NUMBER'; }
         | { type: 'GO_BACK'; }
-        
+        | { type: 'SUBMIT_FORM_COMPLETION'; }
+        | { type: 'RETURN_TO_BEGINNING'; }
     },
     context: {
-      errorMessage: undefined as string | undefined,
+      // errorMessage: undefined as string | undefined,
       createUsernameFormInput: '',
       createEmailFormInput: '',
-      createPhoneNumberFormInput: 0
+      createPhoneNumberFormInput: null
     },
     tsTypes: {} as import('./validationFormMachine.typegen').Typegen0,
     states: {
@@ -64,11 +65,31 @@ const validationFormMachine = createMachine(
             actions: 'assignPhoneNumberFormInputToContext'
           },
           'SUBMIT_PHONE_NUMBER': {
-            target: ''
+            target: 'formCompletion'
           },
           'GO_BACK': {
             target: 'enteringEmail'
             // actions: 'returnEmailAddress'
+          }
+        }
+      },
+      formCompletion: {
+        on: {
+          'SUBMIT_FORM_COMPLETION': {
+            // actions: '' to save current key value pair,
+            actions: 'clearInputFields',
+            // target: 'formLoaded'
+            target: 'formSubmitted'
+          },
+          'GO_BACK': {
+            target: 'enteringPhoneNumber'
+          }
+        }
+      },
+      formSubmitted: {
+        on: {
+          'RETURN_TO_BEGINNING': {
+            target: 'formLoaded'
           }
         }
       }
@@ -90,15 +111,14 @@ const validationFormMachine = createMachine(
         return {
           createPhoneNumberFormInput: event.value
         };
+      }),
+      clearInputFields: assign((context, event) => {
+        return {
+          createUsernameFormInput: '',
+          createEmailFormInput: '',
+          createPhoneNumberFormInput: null
+        };
       })
-      // returnUserName: (context, event) => {
-      //   console.log(context.createUsernameFormInput);
-      //   return context.createUsernameFormInput.valueOf;
-      // },
-      // returnEmailAddress: (context, event) => {
-      //   console.log(context.createEmailFormInput);
-      //   return context.createEmailFormInput;
-      // }
     }
   }
 );

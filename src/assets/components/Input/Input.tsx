@@ -1,11 +1,9 @@
-import { ChangeEvent } from 'react';
-
 type InputProps = { 
   // required: boolean
   placeholder: string
-  value: string
+  value: string | number | null,
   // label: string
-  type?: HTMLInputElement['type']
+  type?: 'text' | 'number'
   onChange: ( type: string, e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
