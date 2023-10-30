@@ -12,6 +12,7 @@
   "dependencies": {
     "@xstate/inspect": "^0.8.0",
     "@xstate/react": "^3.2.2",
+    "formik": "^2.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "xstate": "^4.38.3"

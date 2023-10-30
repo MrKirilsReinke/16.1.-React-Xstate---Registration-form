@@ -1,20 +1,19 @@
 import { ReactNode } from 'react';
 
 type ButtonProps = {
-  onClick: ( type: string ) => void 
+  onClick?: ( type: string ) => void 
   children: ReactNode
   type?: 'button' | 'submit'
 }
 
 const Button = ({ onClick, children, type = 'button' }: ButtonProps) => {
   const handleClick = () => {
-    onClick(type);
+    onClick?.(type);
   };
 
   return (
     <button
       onClick={handleClick}
-      type="button"
       className="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20 w-full">
       {children}
     </button>

@@ -11,26 +11,26 @@ const validationFormMachine = createMachine(
       events: {} as
         | { type: 'CREATE_NEW_USERNAME' }
         | { type: 'SUBMIT_USER_NAME' }
-        | { type: 'ENTERING_USER_NAME'; value: string }
+        | { type: 'ENTERING_USER_NAME'; value: string, field?: string }
         | { type: 'SUBMIT_EMAIL_ADDRESS' }
         | { type: 'ENTERING_EMAIL_ADDRESS'; value: string }
-        | { type: 'ENTERING_PHONE_NUMBER'; value: number }
+        | { type: 'ENTERING_PHONE_NUMBER'; value: string }
         | { type: 'SUBMIT_PHONE_NUMBER'; }
         | { type: 'GO_BACK'; }
-        | { type: 'SUBMIT_FORM_COMPLETION'; }
+        | { type: 'SUBMIT_FORM_COMPLETION'; /* data: object */ data: object }
         | { type: 'RETURN_TO_BEGINNING'; }
     },
     context: {
       // errorMessage: undefined as string | undefined,
       createUsernameFormInput: '',
       createEmailFormInput: '',
-      createPhoneNumberFormInput: null
+      createPhoneNumberFormInput: ''
     },
     tsTypes: {} as import('./validationFormMachine.typegen').Typegen0,
     states: {
       formLoaded: {
         on: {
-          CREATE_NEW_USERNAME: {
+          'CREATE_NEW_USERNAME': {
             target: 'enteringUserName'
           }
         }
@@ -112,11 +112,11 @@ const validationFormMachine = createMachine(
           createPhoneNumberFormInput: event.value
         };
       }),
-      clearInputFields: assign((context, event) => {
+      clearInputFields: assign(() => {
         return {
           createUsernameFormInput: '',
           createEmailFormInput: '',
-          createPhoneNumberFormInput: null
+          createPhoneNumberFormInput: ''
         };
       })
     }
