@@ -1,14 +1,14 @@
 import { ReactNode } from 'react';
 
 type FormikButtonProps = {
-  onClick: ( type: string, e: React.MouseEvent<HTMLButtonElement> ) => void 
+  onClick?: ( type: string, e: React.MouseEvent<HTMLButtonElement> ) => void 
   children: ReactNode
   type?: 'button' | 'submit'
 }
 
 const FormikButton = ({ onClick, children, type = 'button' }: FormikButtonProps) => {
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    onClick(type, e);
+    onClick?.(type, e);
   };
 
   return (
