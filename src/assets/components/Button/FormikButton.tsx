@@ -15,7 +15,7 @@ const FormikButton = ({ onClick, children, type = 'button' }: FormikButtonProps)
     <button
       onClick={handleClick}
       type={type}
-      className="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20 w-full">
+      className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
       {children}
     </button>
   );
