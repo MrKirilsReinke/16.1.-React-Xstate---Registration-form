@@ -17,7 +17,7 @@ const formikValidationFormMachine = createMachine(
         | { type: 'ENTERING_PHONE_NUMBER' }
         | { type: 'SUBMIT_PHONE_NUMBER'; value: string }
         | { type: 'GO_BACK'; }
-        | { type: 'SUBMIT_FORM_COMPLETION'; /* data: object */ }
+        | { type: 'SUBMIT_FORM_COMPLETION'; data: object }
         | { type: 'RETURN_TO_BEGINNING'; }
     },
     context: {
