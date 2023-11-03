@@ -4,7 +4,6 @@ import FormikInput from './Input/FormikInput';
 import FormikButton from './Button/FormikButton';
 import Svg from '../images/Svg';
 import { Formik, Field, Form } from 'formik';
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 
 interface FormValues {
   userName: string;
@@ -54,19 +53,12 @@ function FormikApp() {
     return error;
   };
 
-  // const onSubmit = () => {
-  //   send({
-  //     type: 'SUBMIT_FORM_COMPLETION',
-  //     data: values
-  //   });
-  // };
-
   return (
     <div className="bg-gray-900 py-16 sm:py-24 h-screen grid justify-center items-center">
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Formik
           initialValues={{
-            firstNasme: '',
+            firstName: '',
             lastName: '',
             userName: '',
             repeateUserName: '',
@@ -114,23 +106,27 @@ function FormikApp() {
                     !currentState.matches('formSubmitted') && (
                       <div>
                         <div className="flex flex-col justify-center items-center">
-                          {/* <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                          Current step:
+                          <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                            React/Xstate multi-step from with validation.
                           </h2>
-                          <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
+                          {/* <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
                             {JSON.stringify(currentState.value)}
                           </p> */}
                           {/* <pre>{JSON.stringify(currentState.context)}</pre> */}
-                          <div className="space-y-10 divide-y divide-gray-900/10">
+                          <div className="mt-5 space-y-10 divide-y divide-gray-900/10">
                             <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
                               <div className="px-4 sm:px-0">
-                                <h2 className="text-base font-semibold leading-7 text-white">
+                                <h2 className="text-center font-semibold leading-7 text-white">
                                   Current step:
                                   {/* Personal Information */}
                                 </h2>
-                                <p className="mt-1 text-sm leading-6 text-gray-600">
+                                <p className=" text-center mt-1 text-sm leading-6 text-white">
                                   {/* Use a permanent address where you can receive mail. */}
                                   {JSON.stringify(currentState.value)}
+                                </p>
+                                <p className="mt-5 text-sm leading-6 text-gray-600">
+                                  Please note, next step is impossible until all the fields are
+                                  filled out correctly.
                                 </p>
                               </div>
                               {currentState.matches('enteringUserName') && (
@@ -141,15 +137,17 @@ function FormikApp() {
                                         <Field
                                           as={FormikInput}
                                           label="Enter your first name"
-                                          // id="firstNasme"
+                                          // id="firstName"
                                           placeholder="My first name"
-                                          name="firstNasme"
-                                          // validate={validateUserName}
+                                          name="firstName"
+                                          validate={validateUserName}
                                         />
                                         <div className="mt-2">
-                                          {/* {formik.errors.firstNasme ? (
-                                                                              <div className="text-red-900 text-sm">{formik.errors.firstNasme}</div>
-                                                                            ) : null} */}
+                                          {formik.errors.firstName ? (
+                                            <div className="text-red-900 text-sm">
+                                              {formik.errors.firstName}
+                                            </div>
+                                          ) : null}
                                         </div>
                                       </div>
 
@@ -160,12 +158,14 @@ function FormikApp() {
                                           // id="lastName"
                                           placeholder="My last name"
                                           name="lastName"
-                                          // validate={validateUserName}
+                                          validate={validateUserName}
                                         />
                                         <div className="mt-2">
-                                          {/* {formik.errors.lastName ? (
-                                                                              <div className="text-red-900 text-sm">{formik.errors.lastName}</div>
-                                                                            ) : null} */}
+                                          {formik.errors.lastName ? (
+                                            <div className="text-red-900 text-sm">
+                                              {formik.errors.lastName}
+                                            </div>
+                                          ) : null}
                                         </div>
                                       </div>
 
@@ -194,68 +194,132 @@ function FormikApp() {
                                           // id="repeateUserName"
                                           placeholder="My Username"
                                           name="repeateUserName"
-                                          // validate={validateUserName}
+                                          validate={validateUserName}
                                         />
                                         <div className="mt-2">
-                                          {/* {formik.errors.repeateUserName ? (
-                                                                              <div className="text-red-900 text-sm">{formik.errors.repeateUserName}</div>
-                                                                            ) : null} */}
+                                          {formik.errors.repeateUserName ? (
+                                            <div className="text-red-900 text-sm">
+                                              {formik.errors.repeateUserName}
+                                            </div>
+                                          ) : null}
                                         </div>
                                       </div>
+                                    </div>
+                                  </div>
+                                  {Object.keys(formik.errors).length === 0 && (
+                                    <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+                                      <FormikButton
+                                        onClick={() => {
+                                          send({
+                                            type: 'SUBMIT_USER_NAME',
+                                            value: formik.values.userName
+                                          });
+                                        }}>
+                                        Next
+                                      </FormikButton>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+
+                              {currentState.matches('enteringEmail') && (
+                                <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                                  <div className="px-4 py-6 sm:p-8">
+                                    <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label='Enter your email address'
+                                          // id="eMail"
+                                          placeholder="My email address"
+                                          name="eMail"
+                                          type="email"
+                                          validate={validateEmail}
+                                        />
+                                        {formik.errors.eMail ? (
+                                          <div className="text-red-900">{formik.errors.eMail}</div>
+                                        ) : null}
+                                      </div>
+
+
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label='Repeat your email address'
+                                          // id="eMail"
+                                          placeholder="My email address"
+                                          name="repeateMail"
+                                          type="email"
+                                          validate={validateEmail}
+                                        />
+                                        {formik.errors.eMail ? (
+                                          <div className="text-red-900">{formik.errors.eMail}</div>
+                                        ) : null}
+                                      </div>
+
+                                      <div className="sm:col-span-4">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Enter your telephone index, starting with +"
+                                          id="userName"
+                                          placeholder="My Username"
+                                          name="userName"
+                                          validate={validateUserName}
+                                        />
+                                        <div className="mt-2">
+                                          {formik.errors.userName ? (
+                                            <div className="text-red-900 text-sm">
+                                              {formik.errors.userName}
+                                            </div>
+                                          ) : null}
+                                        </div>
+                                      </div>
+
+                                      <div className="sm:col-span-4">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Repeat your username"
+                                          // id="repeateUserName"
+                                          placeholder="My Username"
+                                          name="repeateUserName"
+                                          validate={validateUserName}
+                                        />
+                                        <div className="mt-2">
+                                          {formik.errors.repeateUserName ? (
+                                            <div className="text-red-900 text-sm">
+                                              {formik.errors.repeateUserName}
+                                            </div>
+                                          ) : null}
+                                        </div>
+                                      </div>
+
+
                                     </div>
                                   </div>
                                   <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                                     <FormikButton
                                       onClick={() => {
                                         send({
-                                          type: 'SUBMIT_USER_NAME',
-                                          value: formik.values.userName
+                                          type: 'GO_BACK'
                                         });
                                       }}>
-                                      Next
+                                          Back
                                     </FormikButton>
-                                  </div>
+                                    <FormikButton
+                                      onClick={() => {
+                                        send({
+                                          type: 'SUBMIT_EMAIL_ADDRESS',
+                                          value: formik.values.eMail
+                                        });
+                                      }}>
+                                          Next
+                                    </FormikButton>
+                                  </div>c
                                 </div>
                               )}
                             </div>
                           </div>
 
-                          {currentState.matches('enteringEmail') && (
-                            <div className="grid grid-flow-row gap-5 justify-center">
-                              <Field
-                                as={FormikInput}
-                                id="eMail"
-                                placeholder="My Email"
-                                name="eMail"
-                                type="email"
-                                validate={validateEmail}
-                              />
-
-                              {formik.errors.eMail ? (
-                                <div className="text-red-900">{formik.errors.eMail}</div>
-                              ) : null}
-
-                              <div className="grid grid-cols-2 gap-10 w-[300px] m-auto mt-2">
-                                <FormikButton
-                                  onClick={() => {
-                                    send({
-                                      type: 'GO_BACK'
-                                    });
-                                  }}>
-                                  Back
-                                </FormikButton>
-                                <FormikButton
-                                  onClick={() => {
-                                    send({
-                                      type: 'SUBMIT_EMAIL_ADDRESS',
-                                      value: formik.values.eMail
-                                    });
-                                  }}>
-                                  Next
-                                </FormikButton>
-                              </div>
-                            </div>
-                          )}
 
                           {currentState.matches('enteringPhoneNumber') && (
                             <div className="grid grid-flow-row gap-5 justify-center">
