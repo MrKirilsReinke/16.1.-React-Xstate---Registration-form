@@ -64,7 +64,7 @@ function FormikApp() {
             repeateUserName: '',
             eMail: '',
             repeateMail: '',
-            telephoneIndex: '',
+            telephoneCode: '',
             phoneNumber: '',
             country: '',
             streetAddress: '',
@@ -136,9 +136,9 @@ function FormikApp() {
                                       <div className="sm:col-span-3">
                                         <Field
                                           as={FormikInput}
-                                          label="Enter your first name"
+                                          label="First name"
                                           // id="firstName"
-                                          placeholder="My first name"
+                                          placeholder="First name"
                                           name="firstName"
                                           validate={validateUserName}
                                         />
@@ -154,9 +154,9 @@ function FormikApp() {
                                       <div className="sm:col-span-3">
                                         <Field
                                           as={FormikInput}
-                                          label="Enter your last name"
+                                          label="Last name"
                                           // id="lastName"
-                                          placeholder="My last name"
+                                          placeholder="Last name"
                                           name="lastName"
                                           validate={validateUserName}
                                         />
@@ -172,9 +172,9 @@ function FormikApp() {
                                       <div className="sm:col-span-4">
                                         <Field
                                           as={FormikInput}
-                                          label="Enter your username"
+                                          label="Username"
                                           id="userName"
-                                          placeholder="My Username"
+                                          placeholder="Username"
                                           name="userName"
                                           validate={validateUserName}
                                         />
@@ -190,9 +190,9 @@ function FormikApp() {
                                       <div className="sm:col-span-4">
                                         <Field
                                           as={FormikInput}
-                                          label="Repeat your username"
+                                          label="Repeat username"
                                           // id="repeateUserName"
-                                          placeholder="My Username"
+                                          placeholder="Username"
                                           name="repeateUserName"
                                           validate={validateUserName}
                                         />
@@ -229,9 +229,9 @@ function FormikApp() {
                                       <div className="sm:col-span-3">
                                         <Field
                                           as={FormikInput}
-                                          label='Enter your email address'
+                                          label="E-mail"
                                           // id="eMail"
-                                          placeholder="My email address"
+                                          placeholder="E-mail"
                                           name="eMail"
                                           type="email"
                                           validate={validateEmail}
@@ -241,13 +241,12 @@ function FormikApp() {
                                         ) : null}
                                       </div>
 
-
                                       <div className="sm:col-span-3">
                                         <Field
                                           as={FormikInput}
-                                          label='Repeat your email address'
+                                          label="Repeat your email address"
                                           // id="eMail"
-                                          placeholder="My email address"
+                                          placeholder="E-mail"
                                           name="repeateMail"
                                           type="email"
                                           validate={validateEmail}
@@ -260,9 +259,9 @@ function FormikApp() {
                                       <div className="sm:col-span-4">
                                         <Field
                                           as={FormikInput}
-                                          label="Enter your telephone index, starting with +"
+                                          label="Telephone code (+***)"
                                           id="userName"
-                                          placeholder="My Username"
+                                          placeholder="+***"
                                           name="userName"
                                           validate={validateUserName}
                                         />
@@ -278,22 +277,18 @@ function FormikApp() {
                                       <div className="sm:col-span-4">
                                         <Field
                                           as={FormikInput}
-                                          label="Repeat your username"
-                                          // id="repeateUserName"
-                                          placeholder="My Username"
-                                          name="repeateUserName"
-                                          validate={validateUserName}
+                                          label="Phone number"
+                                          placeholder="Phone number"
+                                          name="phoneNumber"
+                                          validate={validatePhoneNumber}
                                         />
-                                        <div className="mt-2">
-                                          {formik.errors.repeateUserName ? (
-                                            <div className="text-red-900 text-sm">
-                                              {formik.errors.repeateUserName}
-                                            </div>
-                                          ) : null}
-                                        </div>
+
+                                        {formik.errors.phoneNumber ? (
+                                          <div className="text-red-900">
+                                            {formik.errors.phoneNumber}
+                                          </div>
+                                        ) : null}
                                       </div>
-
-
                                     </div>
                                   </div>
                                   <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
@@ -303,7 +298,7 @@ function FormikApp() {
                                           type: 'GO_BACK'
                                         });
                                       }}>
-                                          Back
+                                      Back
                                     </FormikButton>
                                     <FormikButton
                                       onClick={() => {
@@ -312,49 +307,105 @@ function FormikApp() {
                                           value: formik.values.eMail
                                         });
                                       }}>
-                                          Next
+                                      Next
                                     </FormikButton>
-                                  </div>c
+                                  </div>
+                                </div>
+                              )}
+
+                              {currentState.matches('enteringPhoneNumber') && (
+                                <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                                  <div className="px-4 py-6 sm:p-8">
+                                    <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Country"
+                                          // id="eMail"
+                                          placeholder="Country"
+                                          name="country"
+                                          // type="email"
+                                          validate={validateUserName}
+                                        />
+                                        {formik.errors.country ? (
+                                          <div className="text-red-900">{formik.errors.country}</div>
+                                        ) : null}
+                                      </div>
+
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Street address"
+                                          // id="eMail"
+                                          placeholder="Street address"
+                                          name="streetAddress"
+                                          validate={validateUserName}
+                                        />
+                                        {formik.errors.streetAddress ? (
+                                          <div className="text-red-900">{formik.errors.streetAddress}</div>
+                                        ) : null}
+                                      </div>
+
+                                      <div className="sm:col-span-4">
+                                        <Field
+                                          as={FormikInput}
+                                          label="City"
+                                          // id="userName"
+                                          placeholder="City"
+                                          name="city"
+                                          validate={validateUserName}
+                                        />
+                                        <div className="mt-2">
+                                          {formik.errors.city ? (
+                                            <div className="text-red-900 text-sm">
+                                              {formik.errors.city}
+                                            </div>
+                                          ) : null}
+                                        </div>
+                                      </div>
+
+                                      <div className="sm:col-span-4">
+                                        <Field
+                                          as={FormikInput}
+                                          label="State"
+                                          placeholder="State"
+                                          name="state"
+                                          validate={validatePhoneNumber}
+                                        />
+
+                                        {formik.errors.state ? (
+                                          <div className="text-red-900">
+                                            {formik.errors.state}
+                                          </div>
+                                        ) : null}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+                                    <FormikButton
+                                      onClick={() => {
+                                        send({
+                                          type: 'GO_BACK'
+                                        });
+                                      }}>
+                                    Back
+                                    </FormikButton>
+                                    <FormikButton
+                                      onClick={() => {
+                                        send({
+                                          type: 'SUBMIT_PHONE_NUMBER',
+                                          value: formik.values.phoneNumber
+                                        });
+                                      }}>
+                                    Next
+                                    </FormikButton>
+                                  </div>
                                 </div>
                               )}
                             </div>
                           </div>
 
 
-                          {currentState.matches('enteringPhoneNumber') && (
-                            <div className="grid grid-flow-row gap-5 justify-center">
-                              <Field
-                                as={FormikInput}
-                                placeholder="My phone number"
-                                name="phoneNumber"
-                                validate={validatePhoneNumber}
-                              />
-
-                              {formik.errors.phoneNumber ? (
-                                <div className="text-red-900">{formik.errors.phoneNumber}</div>
-                              ) : null}
-
-                              <div className="grid grid-cols-2 gap-10 w-[300px] m-auto mt-2">
-                                <FormikButton
-                                  onClick={() => {
-                                    send({
-                                      type: 'GO_BACK'
-                                    });
-                                  }}>
-                                  Back
-                                </FormikButton>
-                                <FormikButton
-                                  onClick={() => {
-                                    send({
-                                      type: 'SUBMIT_PHONE_NUMBER',
-                                      value: formik.values.phoneNumber
-                                    });
-                                  }}>
-                                  Next
-                                </FormikButton>
-                              </div>
-                            </div>
-                          )}
                         </div>
                       </div>
                     )
