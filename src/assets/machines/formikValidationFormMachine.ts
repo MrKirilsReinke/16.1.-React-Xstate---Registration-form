@@ -6,7 +6,7 @@ const formikValidationFormMachine = createMachine(
     id: 'formikValidationFormMachine',
     predictableActionArguments: true,
     preserveActionOrder: true,
-    initial: 'formLoaded',
+    initial: 'enteringEmail',
     schema: {
       events: {} as
         | { type: 'CREATE_NEW_USERNAME' }
@@ -30,7 +30,7 @@ const formikValidationFormMachine = createMachine(
       formLoaded: {
         on: {
           'CREATE_NEW_USERNAME': {
-            target: 'enteringUserName'
+            target: 'enteringEmail'
           }
         }
       },
@@ -38,6 +38,10 @@ const formikValidationFormMachine = createMachine(
         on: {
           'SUBMIT_USER_NAME': {
             actions: 'assignUserNameFormInputToContext',
+            target: 'enteringPhoneNumber'
+          }
+          ,
+          'GO_BACK': {
             target: 'enteringEmail'
           }
         }
@@ -46,11 +50,12 @@ const formikValidationFormMachine = createMachine(
         on: {
           'SUBMIT_EMAIL_ADDRESS': {
             actions: 'assignEmailFormInputToContext',
-            target: 'enteringPhoneNumber'
-          },
-          'GO_BACK': {
             target: 'enteringUserName'
           }
+          // ,
+          // 'GO_BACK': {
+          //   target: 'enteringUserName'
+          // }
         }
       },
       enteringPhoneNumber: {
@@ -60,7 +65,7 @@ const formikValidationFormMachine = createMachine(
             target: 'formCompletion'
           },
           'GO_BACK': {
-            target: 'enteringEmail'
+            target: 'enteringUserName'
           }
         }
       },
@@ -78,7 +83,7 @@ const formikValidationFormMachine = createMachine(
       formSubmitted: {
         on: {
           'RETURN_TO_BEGINNING': {
-            target: 'formLoaded'
+            target: 'enteringEmail'
           }
         }
       }
