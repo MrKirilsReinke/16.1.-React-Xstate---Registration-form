@@ -7,18 +7,18 @@ import { Formik, Field, Form } from 'formik';
 import Input from './Input/Input';
 
 interface FormValues {
-  eMail: string,
-  firstName: string,
-  lastName: string,
-  dateOfBirth: string,
-  userName: string,
-  telephoneCode: string,
-  phoneNumber: string,
-  country: string,
-  streetAddress: string,
-  city: string,
-  state: string,
-  zip: ''
+  eMail: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  userName: string;
+  countryCode: string;
+  phoneNumber: string;
+  country: string;
+  streetAddress: string;
+  city: string;
+  // state: string;
+  zip: '';
 }
 
 function FormikApp() {
@@ -26,21 +26,6 @@ function FormikApp() {
     services: {},
     devTools: true
   });
-
-  // eMail: string,
-  // firstName: string,
-  // lastName: string,
-  // dateOfBirth: string,
-  // userName: string,
-  // // repeateUserName: string,
-  // // repeateMail: string,
-  // telephoneCode: string,
-  // phoneNumber: string,
-  // country: string,
-  // streetAddress: string,
-  // city: string,
-  // state: string,
-  // zip: ''
 
   const validateEmail = value => {
     let error;
@@ -50,10 +35,9 @@ function FormikApp() {
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
       error = 'Invalid email address';
     }
-
     return error;
   };
-  
+
   const validateFirstName = value => {
     let error;
 
@@ -62,7 +46,6 @@ function FormikApp() {
     } else if (value.length > 15) {
       error = 'Must be 15 characters or less';
     }
-
     return error;
   };
 
@@ -74,7 +57,6 @@ function FormikApp() {
     } else if (value.length > 15) {
       error = 'Must be 15 characters or less';
     }
-
     return error;
   };
 
@@ -85,12 +67,10 @@ function FormikApp() {
       error = 'Fill out this field';
     } else {
       const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/;
-  
       if (!dateRegex.test(value)) {
         error = 'Please enter a valid date in the format dd.mm.yyyy';
       }
     }
-  
     return error;
   };
 
@@ -100,7 +80,6 @@ function FormikApp() {
     if (!value) {
       error = 'Fill out this field';
     }
-    
     return error;
   };
 
@@ -112,18 +91,15 @@ function FormikApp() {
     } else if (value.length > 15) {
       error = 'Must be 15 characters or less';
     }
-
     return error;
   };
 
-  const validateTelephoneCode = value => {
-    const minLength = 2; // Minimum length of the telephone code
-    const maxLength = 5; // Maximum length of the telephone code
-    const numericRegex = /^[0-9]+$/; // Regular expression to match numeric values
-  
-    // Remove any whitespace from the input value
+  const validateCountryCode = value => {
+    const minLength = 2;
+    const maxLength = 5;
+    const numericRegex = /^[0-9]+$/;
     const sanitizedValue = value.trim();
-  
+
     if (!sanitizedValue) {
       return 'Telephone code is required';
     } else if (sanitizedValue.length < minLength || sanitizedValue.length > maxLength) {
@@ -131,8 +107,6 @@ function FormikApp() {
     } else if (!numericRegex.test(sanitizedValue)) {
       return 'Telephone code must consist of numeric digits only';
     }
-  
-    // If the value passes all validation checks, it's considered valid
     return null;
   };
 
@@ -144,7 +118,6 @@ function FormikApp() {
     } else if (!/^\d{10}$/i.test(value)) {
       error = 'Invalid phone number. Please enter a 10-digit number.';
     }
-
     return error;
   };
 
@@ -154,7 +127,6 @@ function FormikApp() {
     if (!value) {
       error = 'Fill out this field';
     }
-    
     return error;
   };
 
@@ -164,25 +136,20 @@ function FormikApp() {
     if (!value) {
       error = 'Fill out this field';
     }
-    
     return error;
   };
 
-  const validateState = value => {
-    let error;
+  // const validateState = value => {
+  //   let error;
 
-    if (!value) {
-      error = 'Fill out this field';
-    }
-    
-    return error;
-  };
+  //   if (!value) {
+  //     error = 'Fill out this field';
+  //   }
+  //   return error;
+  // };
 
   const validatePostalCode = value => {
-  // Define a regular expression to match the expected pattern
     const postalCodeRegex = /^[A-Za-z]{2}-\d{4}$/;
-
-    // Remove any whitespace from the input value
     const sanitizedValue = value.trim();
 
     if (!sanitizedValue) {
@@ -190,8 +157,6 @@ function FormikApp() {
     } else if (!postalCodeRegex.test(sanitizedValue)) {
       return 'Postal code must be in the format "two letters - 4 digits"';
     }
-
-    // If the value passes all validation checks, it's considered valid
     return null;
   };
 
@@ -204,203 +169,55 @@ function FormikApp() {
         dateOfBirth: '',
         country: '',
         userName: '',
-        telephoneCode: '',
+        countryCode: '',
         phoneNumber: '',
         streetAddress: '',
         city: '',
-        state: '',
+        // state: '',
         zip: ''
       }}
       onSubmit={(values: FormValues /* { setSubmitting } */) => {
-        // setSubmitting(true);
         send({
           type: 'SUBMIT_FORM_COMPLETION',
           data: values
         });
-        // setSubmitting(false);
       }}
-      // onSubmit={onSubmit}
     >
       {formik => {
         console.log('formik props', formik);
         return (
           <Form>
-            {/* <div className="bg-gray-900 py-16 sm:py-24 h-screen grid justify-center items-center">
-              <div className="mx-auto max-w-7xl sm:px-6 lg:px-8"> */}
-            <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 shadow-xl sm:rounded-3xl sm:px-24 xl:py-32">
-              {currentState.matches('formLoaded') ? (
-                <div className="grid grid-flow-row gap-10 justify-center">
-                  <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                    Press "Start" button to begin registration
-                  </h2>
-                  <button
-                    type="button"
-                    className="place-self-center w-[130px] rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
-                    onClick={() => {
-                      send({
-                        type: 'CREATE_NEW_USERNAME'
-                      });
-                    }}>
-                    Start
-                  </button>
-                </div>
-              ) : !currentState.matches('formCompletion') ? (
-                !currentState.matches('formSubmitted') && (
-                  <div>
-                    <div className="flex flex-col justify-center items-center gap-10">
-                      <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                        React/Xstate multi-step from with validation.
-                      </h2>
-                      {currentState.matches('enteringEmail') && (
-                        <div className="grid grid-flow-row gap-5 justify-center">
-                          <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300 mt-5">
-                            To begin registration, enter your e-mail address.
-                          </p>
-                          <Field
-                            as={Input}
-                            placeholder="E-mail"
-                            name="eMail"
-                            type="email"
-                            validate={validateEmail}
-                          />
-                          {formik.errors.eMail ? (
-                            <div className="text-red-900">{formik.errors.eMail}</div>
-                          ) : (
-                            <div className="grid gap-10 w-[300px] m-auto mt-2">
-                              <FormikButton
-                                onClick={() => {
-                                  send({
-                                    type: 'SUBMIT_EMAIL_ADDRESS',
-                                    value: formik.values.eMail
-                                  });
-                                }}>
-                                Next
-                              </FormikButton>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {currentState.matches('enteringUserName') && (
-                        <div className="mt-5 space-y-10 divide-y divide-gray-900/10">
-                          <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
-                            <div className="px-4 sm:px-0">
-                              <h2 className="text-center font-semibold leading-7 text-white">
-                                Current step:
-                              </h2>
-                              <p className=" text-center mt-1 text-sm leading-6 text-white">
-                                {JSON.stringify(currentState.value)}
+            <div className="bg-gray-900 py-16 sm:py-24 h-screen grid justify-center items-center">
+              <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 shadow-xl sm:rounded-3xl sm:px-24 xl:py-32">
+                  {!currentState.matches('formCompletion') ? (
+                    !currentState.matches('formSubmitted') && (
+                      <div>
+                        <div className="flex flex-col justify-center items-center gap-10">
+                          <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                            React/Xstate multi-step form with validation.
+                          </h2>
+                          {currentState.matches('enteringEmail') && (
+                            <div className="grid grid-flow-row gap-5 justify-center">
+                              <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300 mt-5">
+                                To begin registration, enter your e-mail address.
                               </p>
-                              <p className="mt-5 text-sm leading-6 text-gray-600">
-                                Please note, next step is impossible until all the fields are filled
-                                out correctly.
-                              </p>
-                            </div>
-
-                            <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                              <div className="px-4 py-6 sm:p-8">
-                                <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                  <div className="sm:col-span-3">
-                                    <Field
-                                      as={FormikInput}
-                                      label="First name"
-                                      placeholder="First name"
-                                      name="firstName"
-                                      validate={validateFirstName}
-                                    />
-                                    <div className="mt-2">
-                                      {formik.errors.firstName ? (
-                                        <div className="text-red-900 text-sm">
-                                          {formik.errors.firstName}
-                                        </div>
-                                      ) : null}
-                                    </div>
-                                  </div>
-
-                                  <div className="sm:col-span-3">
-                                    <Field
-                                      as={FormikInput}
-                                      label="Last name"
-                                      placeholder="Last name"
-                                      name="lastName"
-                                      validate={validateLastName}
-                                    />
-                                    <div className="mt-2">
-                                      {formik.errors.lastName ? (
-                                        <div className="text-red-900 text-sm">
-                                          {formik.errors.lastName}
-                                        </div>
-                                      ) : null}
-                                    </div>
-                                  </div>
-
-                                  <div className="sm:col-span-3">
-                                    <Field
-                                      as={FormikInput}
-                                      label="Date of birth"
-                                      placeholder="Example: 06.03.2007"
-                                      name="dateOfBirth"
-                                      validate={validateDateOfBirth}
-                                    />
-                                    <div className="mt-2">
-                                      {formik.errors.dateOfBirth ? (
-                                        <div className="text-red-900 text-sm">
-                                          {formik.errors.dateOfBirth}
-                                        </div>
-                                      ) : null}
-                                    </div>
-                                  </div>
-
-                                  <div className="sm:col-span-3">
-                                    <Field
-                                      as={FormikInput}
-                                      label="Country"
-                                      placeholder="Country"
-                                      name="country"
-                                      validate={validateCountry}
-                                    />
-                                    <div className="mt-2">
-                                      {formik.errors.country ? (
-                                        <div className="text-red-900 text-sm">
-                                          {formik.errors.country}
-                                        </div>
-                                      ) : null}
-                                    </div>
-                                  </div>
-
-                                  <div className="sm:col-span-4">
-                                    <Field
-                                      as={FormikInput}
-                                      label="Username"
-                                      placeholder="Username"
-                                      name="userName"
-                                      validate={validateUserName}
-                                    />
-                                    <div className="mt-2">
-                                      {formik.errors.userName ? (
-                                        <div className="text-red-900 text-sm">
-                                          {formik.errors.userName}
-                                        </div>
-                                      ) : null}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              {Object.keys(formik.errors).length === 0 && (
-                                <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+                              <Field
+                                as={Input}
+                                placeholder="E-mail"
+                                name="eMail"
+                                type="email"
+                                validate={validateEmail}
+                              />
+                              {(formik.errors.eMail || !formik.touched.eMail) ? (
+                                <div className="text-red-900">{formik.errors.eMail}</div>
+                              ) : (
+                                <div className="grid gap-10 w-[300px] m-auto mt-2">
                                   <FormikButton
                                     onClick={() => {
                                       send({
-                                        type: 'GO_BACK'
-                                      });
-                                    }}>
-                                    Back
-                                  </FormikButton>
-                                  <FormikButton
-                                    onClick={() => {
-                                      send({
-                                        type: 'SUBMIT_USER_NAME',
-                                        value: formik.values.userName
+                                        type: 'SUBMIT_EMAIL_ADDRESS',
+                                        value: formik.values.eMail
                                       });
                                     }}>
                                     Next
@@ -408,235 +225,374 @@ function FormikApp() {
                                 </div>
                               )}
                             </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {currentState.matches('enteringPhoneNumber') && (
-                        <div className="mt-5 space-y-10 divide-y divide-gray-900/10">
-                          <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
-                            <div className="px-4 sm:px-0">
-                              <h2 className="text-center font-semibold leading-7 text-white">
-                                Current step:
-                              </h2>
-                              <p className=" text-center mt-1 text-sm leading-6 text-white">
-                                {JSON.stringify(currentState.value)}
-                              </p>
-                              <p className="mt-5 text-sm leading-6 text-gray-600">
-                                Please note, next step is impossible until all the fields are filled
-                                out correctly.
-                              </p>
-                            </div>
-
-                            <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                              <div className="px-4 py-6 sm:p-8">
-                                <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                  <div className="sm:col-span-3">
-                                    <Field
-                                      as={FormikInput}
-                                      label="Telephone code"
-                                      placeholder="+***"
-                                      name="telephoneCode"
-                                      validate={validateTelephoneCode}
-                                    />
-                                    {formik.errors.telephoneCode ? (
-                                      <div className="text-red-900">
-                                        {formik.errors.telephoneCode}
+                          )}
+                          {currentState.matches('enteringUserName') && (
+                            <div className="mt-5 space-y-10 divide-y divide-gray-900/10">
+                              <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+                                <div className="px-4 sm:px-0">
+                                  <h2 className="text-center font-semibold leading-7 text-white">
+                                    Current step:
+                                  </h2>
+                                  <p className=" text-center mt-1 text-sm leading-6 text-white">
+                                    {JSON.stringify(currentState.value)}
+                                  </p>
+                                  <p className="mt-5 text-sm leading-6 text-gray-600">
+                                    Please note, next step is impossible until all the fields are
+                                    filled out correctly.
+                                  </p>
+                                </div>
+                                <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                                  <div className="px-4 py-6 sm:p-8">
+                                    <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label="First name"
+                                          placeholder="First name"
+                                          name="firstName"
+                                          validate={validateFirstName}
+                                        />
+                                        {formik.errors.firstName ? (
+                                          <div className="text-red-900 text-sm mt-2">
+                                            {formik.errors.firstName}
+                                          </div>
+                                        ) : null}
                                       </div>
-                                    ) : null}
-                                  </div>
-
-                                  <div className="sm:col-span-3">
-                                    <Field
-                                      as={FormikInput}
-                                      label="Phone number"
-                                      placeholder="Phone number"
-                                      name="phoneNumber"
-                                      validate={validatePhoneNumber}
-                                    />
-                                    {formik.errors.phoneNumber ? (
-                                      <div className="text-red-900">
-                                        {formik.errors.phoneNumber}
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Last name"
+                                          placeholder="Last name"
+                                          name="lastName"
+                                          validate={validateLastName}
+                                        />
+                                        {formik.errors.lastName ? (
+                                          <div className="text-red-900 text-sm mt-2">
+                                            {formik.errors.lastName}
+                                          </div>
+                                        ) : null}
                                       </div>
-                                    ) : null}
-                                  </div>
-
-                                  <div className="sm:col-span-3">
-                                    <Field
-                                      as={FormikInput}
-                                      label="Street address"
-                                      placeholder="Street address"
-                                      name="streetAddress"
-                                      validate={validateStreetAddress}
-                                    />
-                                    {formik.errors.streetAddress ? (
-                                      <div className="text-red-900">
-                                        {formik.errors.streetAddress}
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Date of birth"
+                                          placeholder="Example: 06.03.2007"
+                                          name="dateOfBirth"
+                                          validate={validateDateOfBirth}
+                                        />
+                                        {formik.errors.dateOfBirth ? (
+                                          <div className="text-red-900 text-sm mt-2">
+                                            {formik.errors.dateOfBirth}
+                                          </div>
+                                        ) : null}
                                       </div>
-                                    ) : null}
-                                  </div>
-
-                                  <div className="sm:col-span-2 sm:col-start-1">
-                                    <Field
-                                      as={FormikInput}
-                                      label="City"
-                                      placeholder="City"
-                                      name="city"
-                                      validate={validateCity}
-                                    />
-                                    <div className="mt-2">
-                                      {formik.errors.city ? (
-                                        <div className="text-red-900 text-sm">
-                                          {formik.errors.city}
-                                        </div>
-                                      ) : null}
+                                      <div className="sm:col-span-3 sm:col-start-1">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Username"
+                                          placeholder="Username"
+                                          name="userName"
+                                          validate={validateUserName}
+                                        />
+                                        {formik.errors.userName ? (
+                                          <div className="text-red-900 text-sm mt-2">
+                                            {formik.errors.userName}
+                                          </div>
+                                        ) : null}
+                                      </div>
                                     </div>
                                   </div>
-
-                                  <div className="sm:col-span-2">
-                                    <Field
-                                      as={FormikInput}
-                                      label="State"
-                                      placeholder="State"
-                                      name="state"
-                                      validate={validateState}
-                                    />
-
-                                    {formik.errors.state ? (
-                                      <div className="text-red-900">{formik.errors.state}</div>
-                                    ) : null}
-                                  </div>
-
-                                  <div className="sm:col-span-2">
-                                    <Field
-                                      as={FormikInput}
-                                      label="Posatal code"
-                                      placeholder="Posatal code"
-                                      name="zip"
-                                      validate={validatePostalCode}
-                                    />
-
-                                    {formik.errors.zip ? (
-                                      <div className="text-red-900">{formik.errors.zip}</div>
-                                    ) : null}
+                                  <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+                                    <FormikButton
+                                      onClick={() => {
+                                        send({
+                                          type: 'GO_BACK'
+                                        });
+                                      }}>
+                                      Back
+                                    </FormikButton>
+                                    <FormikButton
+                                      // disabled={!formik.isValid || !formik.touched.userName}
+                                      onClick={() => {
+                                        send({
+                                          type: 'SUBMIT_USER_NAME',
+                                          value: formik.values.userName
+                                        });
+                                      }}>
+                                      Next
+                                    </FormikButton>
                                   </div>
                                 </div>
                               </div>
-                              <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
-                                <FormikButton
-                                  onClick={() => {
-                                    send({
-                                      type: 'GO_BACK'
-                                    });
-                                  }}>
-                                  Back
-                                </FormikButton>
-                                <FormikButton
-                                  onClick={() => {
-                                    send({
-                                      type: 'SUBMIT_PHONE_NUMBER',
-                                      value: formik.values.phoneNumber
-                                    });
-                                  }}>
-                                  Next
-                                </FormikButton>
+                            </div>
+                          )}
+                          {currentState.matches('enteringPhoneNumber') && (
+                            <div className="mt-5 space-y-10 divide-y divide-gray-900/10">
+                              <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+                                <div className="px-4 sm:px-0">
+                                  <h2 className="text-center font-semibold leading-7 text-white">
+                                    Current step:
+                                  </h2>
+                                  <p className=" text-center mt-1 text-sm leading-6 text-white">
+                                    {JSON.stringify(currentState.value)}
+                                  </p>
+                                  <p className="mt-5 text-sm leading-6 text-gray-600">
+                                    Please note, next step is impossible until all the fields are
+                                    filled out correctly.
+                                  </p>
+                                </div>
+                                <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                                  <div className="px-4 py-6 sm:p-8">
+                                    <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Country code"
+                                          placeholder="+***"
+                                          name="countryCode"
+                                          validate={validateCountryCode}
+                                        />
+                                        {formik.errors.countryCode ? (
+                                          <div className="text-red-900 text-sm mt-2">
+                                            {formik.errors.countryCode}
+                                          </div>
+                                        ) : null}
+                                      </div>
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Phone number"
+                                          placeholder="Phone number"
+                                          name="phoneNumber"
+                                          validate={validatePhoneNumber}
+                                        />
+                                        {formik.errors.phoneNumber ? (
+                                          <div className="text-red-900 text-sm mt-2">
+                                            {formik.errors.phoneNumber}
+                                          </div>
+                                        ) : null}
+                                      </div>
+                                      <div className="sm:col-span-3">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Street address"
+                                          placeholder="Street address"
+                                          name="streetAddress"
+                                          validate={validateStreetAddress}
+                                        />
+                                        {formik.errors.streetAddress ? (
+                                          <div className="text-red-900 text-sm mt-2">
+                                            {formik.errors.streetAddress}
+                                          </div>
+                                        ) : null}
+                                      </div>
+                                      <div className="sm:col-span-2 sm:col-start-1">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Country"
+                                          placeholder="Country"
+                                          name="country"
+                                          validate={validateCountry}
+                                        />
+                                        {formik.errors.country ? (
+                                          <div className="text-red-900 text-sm mt-2">
+                                            {formik.errors.country}
+                                          </div>
+                                        ) : null}
+                                      </div>
+
+                                      <div className="sm:col-span-2">
+                                        <Field
+                                          as={FormikInput}
+                                          label="City"
+                                          placeholder="City"
+                                          name="city"
+                                          validate={validateCity}
+                                        />
+                                        {formik.errors.city ? (
+                                          <div className="text-red-900 text-sm mt-2">
+                                            {formik.errors.city}
+                                          </div>
+                                        ) : null}
+                                      </div>
+                                      <div className="sm:col-span-2">
+                                        <Field
+                                          as={FormikInput}
+                                          label="Postal code"
+                                          placeholder="Posatal code"
+                                          name="zip"
+                                          validate={validatePostalCode}
+                                        />
+                                        {formik.errors.zip ? (
+                                          <div className="text-red-900 text-sm mt-2">{formik.errors.zip}</div>
+                                        ) : null}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+                                    <FormikButton
+                                      onClick={() => {
+                                        send({
+                                          type: 'GO_BACK'
+                                        });
+                                      }}>
+                                      Back
+                                    </FormikButton>
+                                    <FormikButton
+                                      // disabled={!formik.isValid || !formik.touched.phoneNumber}
+                                      onClick={() => {
+                                        send({
+                                          type: 'SUBMIT_PHONE_NUMBER',
+                                          value: formik.values.phoneNumber
+                                        });
+                                      }}>
+                                      Next
+                                    </FormikButton>
+                                  </div>
+                                </div>
                               </div>
                             </div>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  ) : (
+                    <div>
+                      <div className="flex flex-col justify-center items-center gap-8">
+                        <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
+                          {JSON.stringify(currentState.value)}
+                        </p>
+                        <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                          Your're almost done!
+                        </h2>
+                        <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
+                          Please, check your competed form one more time and press "Confirm" button
+                          to complete your registration.
+                        </p>
+                        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                          <div className="sm:col-span-2">
+                            <p className="block text-sm font-medium leading-6 text-gray-300">
+                              First name:
+                            </p>
+                            <p className="mt-1 text-gray-300">
+                              {currentState.context.createUsernameFormInput}
+                              {/* {userName} */}
+                            </p>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <p className="block text-sm font-medium leading-6 text-gray-300">
+                              Last name:
+                            </p>
+                            <p className="mt-1 text-gray-300">
+                              {currentState.context.createUsernameFormInput}
+                              {/* {userName} */}
+                            </p>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <p className="block text-sm font-medium leading-6 text-gray-300">
+                              Date of birth:
+                            </p>
+                            <p className="mt-1 text-gray-300">
+                              {currentState.context.createUsernameFormInput}
+                              {/* {userName} */}
+                            </p>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <p className="block text-sm font-medium leading-6 text-gray-300">
+                              Country code:
+                            </p>
+                            <p className="mt-1 text-gray-300">
+                              {/* {currentState.context.createUsernameFormInput} */}
+                              {/* {userName} */}
+                            </p>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <p className="block text-sm font-medium leading-6 text-gray-300">
+                              Phone number:
+                            </p>
+                            <p className="mt-1 text-gray-300">
+                              {currentState.context.createPhoneNumberFormInput}
+                              {/* {eMail} */}
+                            </p>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <p className="block text-sm font-medium leading-6 text-gray-300">
+                              Street address:
+                            </p>
+                            <p className="mt-1 text-gray-300">
+                              {currentState.context.createPhoneNumberFormInput}
+                              {/* {phoneNumber} */}
+                            </p>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <p className="block text-sm font-medium leading-6 text-gray-300">
+                              Country:
+                            </p>
+                            <p className="mt-1 text-gray-300">
+                              {/* {currentState.context.createUsernameFormInput} */}
+                              {/* {userName} */}
+                            </p>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <p className="block text-sm font-medium leading-6 text-gray-300">
+                              City:
+                            </p>
+                            <p className="mt-1 text-gray-300">
+                              {currentState.context.createPhoneNumberFormInput}
+                              {/* {eMail} */}
+                            </p>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <p className="block text-sm font-medium leading-6 text-gray-300">
+                              Postal code:
+                            </p>
+                            <p className="mt-1 text-gray-300">
+                              {currentState.context.createPhoneNumberFormInput}
+                              {/* {phoneNumber} */}
+                            </p>
                           </div>
                         </div>
-                      )}
-                      {/* </div> */}
-                      {/* </div> */}
-                    </div>
-                  </div>
-                )
-              ) : (
-                <div>
-                  <div className="flex flex-col justify-center items-center">
-                    <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
-                      {JSON.stringify(currentState.value)}
-                    </p>
-                    <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                      Your're almost done!
-                    </h2>
-                    <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
-                      Please, check your competed form one more time and press "Confirm" button to
-                      complete your registration.
-                    </p>
-
-                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                      <div className="sm:col-span-3">
-                        <p className="block text-sm font-medium leading-6 text-gray-300">
-                          Username:
-                        </p>
-                        <p className="mt-1 text-gray-300">
-                          {currentState.context.createUsernameFormInput}
-                          {/* {userName} */}
-                        </p>
-                      </div>
-
-                      <div className="sm:col-span-3">
-                        <p className="block text-sm font-medium leading-6 text-gray-300">
-                          E-mail address:
-                        </p>
-                        <p className="mt-1 text-gray-300">
-                          {currentState.context.createEmailFormInput}
-                          {/* {eMail} */}
-                        </p>
-                      </div>
-
-                      <div className="sm:col-span-3">
-                        <p className="block text-sm font-medium leading-6 text-gray-300">
-                          Phone number:
-                        </p>
-                        <p className="mt-1 text-gray-300">
-                          {currentState.context.createPhoneNumberFormInput}
-                          {/* {phoneNumber} */}
-                        </p>
+                        <div className="grid grid-cols-2 gap-10 w-[300px] m-auto mt-10">
+                          <FormikButton
+                            onClick={() => {
+                              send({
+                                type: 'GO_BACK'
+                              });
+                            }}>
+                            Back
+                          </FormikButton>
+                          <FormikButton type="submit">Confirm</FormikButton>
+                        </div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-10 w-[300px] m-auto mt-10">
-                      <FormikButton
-                        onClick={() => {
-                          send({
-                            type: 'GO_BACK'
-                          });
-                        }}>
-                        Back
-                      </FormikButton>
-                      <FormikButton type="submit">Confirm</FormikButton>
+                  )}
+                  {currentState.matches('formSubmitted') && (
+                    <div className="flex flex-col justify-center items-center">
+                      <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
+                        {JSON.stringify(currentState.value)}
+                      </p>
+                      <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                        Yoooooo!
+                      </h2>
+                      <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
+                        Congratulations! You've successfully finished your registartion.
+                      </p>
+                      <div className="grid gap-10 w-[300px] m-auto mt-10">
+                        <FormikButton
+                          onClick={() => {
+                            send({
+                              type: 'RETURN_TO_BEGINNING'
+                            });
+                          }}>
+                          Return to the beginning
+                        </FormikButton>
+                      </div>
                     </div>
-                  </div>
+                  )}
+                  <Svg />
                 </div>
-              )}
-
-              {currentState.matches('formSubmitted') && (
-                <div className="flex flex-col justify-center items-center">
-                  <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
-                    {JSON.stringify(currentState.value)}
-                  </p>
-                  <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                    Yoooooo!
-                  </h2>
-                  <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
-                    Congratulations! You've successfully finished your registartion.
-                  </p>
-                  <div className="grid gap-10 w-[300px] m-auto mt-10">
-                    <FormikButton
-                      onClick={() => {
-                        send({
-                          type: 'RETURN_TO_BEGINNING'
-                        });
-                      }}>
-                      Return to the beginning
-                    </FormikButton>
-                  </div>
-                </div>
-              )}
-              <Svg />
+              </div>
             </div>
-            {/* </div>
-            </div> */}
           </Form>
         );
       }}
