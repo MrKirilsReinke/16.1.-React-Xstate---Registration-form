@@ -150,8 +150,6 @@ function FormikApp() {
       onSubmit={(values: FormValues, { resetForm } /* { setSubmitting } */) => {
         send({
           type: 'SUBMIT_FORM_COMPLETION'
-          // ,
-          // values: values
         });
         resetForm({
           values: {
@@ -206,8 +204,6 @@ function FormikApp() {
                                     onClick={() => {
                                       send({
                                         type: 'SUBMIT_EMAIL_ADDRESS'
-                                        // ,
-                                        // value: formik.values.eMail
                                       });
                                     }}>
                                     Next
@@ -306,12 +302,10 @@ function FormikApp() {
                                       Back
                                     </FormikButton>
                                     <FormikButton
-                                      // disabled={!formik.isValid || !formik.touched.userName}
+                                      disabled={!formik.isValid || !formik.touched.userName}
                                       onClick={() => {
                                         send({
                                           type: 'SUBMIT_PERSONAL_INFO'
-                                          // ,
-                                          // values: formik.values
                                         });
                                       }}>
                                       Next
@@ -427,7 +421,7 @@ function FormikApp() {
                                       Back
                                     </FormikButton>
                                     <FormikButton
-                                      // disabled={!formik.isValid || !formik.touched.phoneNumber}
+                                      disabled={!formik.isValid || !formik.touched.phoneNumber}
                                       onClick={() => {
                                         send({
                                           type: 'SUBMIT_CONTACT_INFO'
