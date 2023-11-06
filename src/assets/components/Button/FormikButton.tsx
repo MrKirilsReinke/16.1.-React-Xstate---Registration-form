@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 type FormikButtonProps = {
   onClick?: ( type: string, e: React.MouseEvent<HTMLButtonElement> ) => void 
   children: ReactNode
-  type?: 'button' | 'submit'
+  type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
   className?: string
 }

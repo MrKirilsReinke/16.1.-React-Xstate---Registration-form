@@ -1,6 +1,4 @@
 type InputProps = { 
-  // field: FieldInputProps<string>
-  // required: boolean
   placeholder: string
   value: string 
   label: string
@@ -9,9 +7,11 @@ type InputProps = {
   type?: 'text' | 'number'
   onChange: ( e: React.ChangeEvent<HTMLInputElement>) => void
   onBlur?: (e) => void
+  formik: any
+  autoComplete?: 'off' | 'on'
 }
 
-const Input = ({ onBlur, placeholder, type = 'text', onChange, name, label, /* id, */ /* field */ /* required = true */ value }: InputProps) => {
+const Input = ({ autoComplete = 'off', formik, onBlur, placeholder, type = 'text', onChange, name, label, /* id, */ /* field */ /* required = true */ value }: InputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // const value = e.target.value;
     onChange(e);
@@ -21,13 +21,12 @@ const Input = ({ onBlur, placeholder, type = 'text', onChange, name, label, /* i
     <label className="flex flex-col text-lg text-center font-medium leading-6 text-white">
       {label}
       <input
+        autoComplete={autoComplete}
         onBlur={onBlur}
         name={name}
-        // id={id}
         type={type}
-        className="mt-2 min-w-[500px] flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6"
+        className={`mt-2 min-w-[500px] flex-auto rounded-md bg-white/5 px-3.5 py-2 text-white shadow-sm sm:text-sm sm:leading-6 focus:outline-none ${formik.errors[name] ? 'border-2 border-red-800' : 'border-0'}`}
         value={value}
-        // {...field}
         placeholder={placeholder}
         onChange={handleChange}
       />

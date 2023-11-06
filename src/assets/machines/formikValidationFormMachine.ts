@@ -10,35 +10,43 @@ const formikValidationFormMachine = createMachine(
     schema: {
       events: {} as
         | { type: 'CREATE_NEW_USERNAME' }
-        | { type: 'SUBMIT_USER_NAME'; value: string }
+        | { type: 'SUBMIT_PERSONAL_INFO'; /* values: object */ }
         | { type: 'ENTERING_USER_NAME' }
-        | { type: 'SUBMIT_EMAIL_ADDRESS'; value: string }
+        | { type: 'SUBMIT_EMAIL_ADDRESS'; /* value: string */ }
         | { type: 'ENTERING_EMAIL_ADDRESS' }
         | { type: 'ENTERING_PHONE_NUMBER' }
-        | { type: 'SUBMIT_PHONE_NUMBER'; value: string }
+        | { type: 'SUBMIT_CONTACT_INFO'; values: object }
         | { type: 'GO_BACK'; }
-        | { type: 'SUBMIT_FORM_COMPLETION'; data: object }
+        | { type: 'SUBMIT_FORM_COMPLETION'; /* values: object */ }
         | { type: 'RETURN_TO_BEGINNING'; }
     },
     context: {
-      createUsernameFormInput: '',
-      createEmailFormInput: '',
-      createPhoneNumberFormInput: ''
+      eMail: '',
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      country: '',
+      userName: '',
+      phoneNumber: '',
+      streetAddress: '',
+      city: '',
+      zip: ''
     },
     tsTypes: {} as import('./formikValidationFormMachine.typegen').Typegen0,
     states: {
-      formLoaded: {
+      enteringEmail: {
         on: {
-          'CREATE_NEW_USERNAME': {
-            target: 'enteringEmail'
+          'SUBMIT_EMAIL_ADDRESS': {
+            // actions: 'assignEmailFormInputToContext',
+            target: 'enteringPersonalInfo'
           }
         }
       },
-      enteringUserName: {
+      enteringPersonalInfo: {
         on: {
-          'SUBMIT_USER_NAME': {
-            actions: 'assignUserNameFormInputToContext',
-            target: 'enteringPhoneNumber'
+          'SUBMIT_PERSONAL_INFO': {
+            // actions: 'assignUserNameFormInputToContext',
+            target: 'enteringContactInfo'
           }
           ,
           'GO_BACK': {
@@ -46,26 +54,15 @@ const formikValidationFormMachine = createMachine(
           }
         }
       },
-      enteringEmail: {
+      enteringContactInfo: {
         on: {
-          'SUBMIT_EMAIL_ADDRESS': {
-            actions: 'assignEmailFormInputToContext',
-            target: 'enteringUserName'
-          }
-          // ,
-          // 'GO_BACK': {
-          //   target: 'enteringUserName'
-          // }
-        }
-      },
-      enteringPhoneNumber: {
-        on: {
-          'SUBMIT_PHONE_NUMBER': {
-            actions: 'assignPhoneNumberFormInputToContext',
+          'SUBMIT_CONTACT_INFO': {
+            // actions: 'assignPhoneNumberFormInputToContext',
+            actions: 'assignValuesToContext',
             target: 'formCompletion'
           },
           'GO_BACK': {
-            target: 'enteringUserName'
+            target: 'enteringPersonalInfo'
           }
         }
       },
@@ -76,7 +73,7 @@ const formikValidationFormMachine = createMachine(
             target: 'formSubmitted'
           },
           'GO_BACK': {
-            target: 'enteringPhoneNumber'
+            target: 'enteringContactInfo'
           }
         }
       },
@@ -91,26 +88,47 @@ const formikValidationFormMachine = createMachine(
   },
   {
     actions: {
-      assignUserNameFormInputToContext: assign((context, event) => {
+      // assignUserNameFormInputToContext: assign((context, event) => {
+      //   return {
+      //     createUsernameFormInput: event.value
+      //   };
+      // }),
+      // assignEmailFormInputToContext: assign((context, event) => {
+      //   return {
+      //     createEmailFormInput: event.value
+      //   };
+      // }),
+      // assignPhoneNumberFormInputToContext: assign((context, event) => {
+      //   return {
+      //     createPhoneNumberFormInput: event.value
+      //   };
+      // }),
+      assignValuesToContext: assign((context, event) => {
         return {
-          createUsernameFormInput: event.value
-        };
-      }),
-      assignEmailFormInputToContext: assign((context, event) => {
-        return {
-          createEmailFormInput: event.value
-        };
-      }),
-      assignPhoneNumberFormInputToContext: assign((context, event) => {
-        return {
-          createPhoneNumberFormInput: event.value
+          eMail: event.values.eMail,
+          firstName: event.values.firstName,
+          lastName: event.values.lastName,
+          dateOfBirth: event.values.dateOfBirth,
+          country: event.values.country,
+          userName: event.values.userName,
+          phoneNumber: event.values.phoneNumber,
+          streetAddress: event.values.streetAddress,
+          city: event.values.city,
+          zip: event.values.zip
         };
       }),
       clearContextFields: assign(() => {
         return {
-          createUsernameFormInput: '',
-          createEmailFormInput: '',
-          createPhoneNumberFormInput: ''
+          eMail: '',
+          firstName: '',
+          lastName: '',
+          dateOfBirth: '',
+          country: '',
+          userName: '',
+          phoneNumber: '',
+          streetAddress: '',
+          city: '',
+          zip: ''
         };
       })
     }

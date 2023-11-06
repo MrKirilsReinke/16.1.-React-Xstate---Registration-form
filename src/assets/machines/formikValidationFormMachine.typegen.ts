@@ -16,9 +16,7 @@
           services: never;
         };
         eventsCausingActions: {
-          "assignEmailFormInputToContext": "SUBMIT_EMAIL_ADDRESS";
-"assignPhoneNumberFormInputToContext": "SUBMIT_PHONE_NUMBER";
-"assignUserNameFormInputToContext": "SUBMIT_USER_NAME";
+          "assignValuesToContext": "SUBMIT_CONTACT_INFO";
 "clearContextFields": "SUBMIT_FORM_COMPLETION";
         };
         eventsCausingDelays: {
@@ -30,7 +28,7 @@
         eventsCausingServices: {
           
         };
-        matchesStates: "enteringEmail" | "enteringPhoneNumber" | "enteringUserName" | "formCompletion" | "formLoaded" | "formSubmitted";
+        matchesStates: "enteringContactInfo" | "enteringEmail" | "enteringPersonalInfo" | "formCompletion" | "formSubmitted";
         tags: never;
       }
   
