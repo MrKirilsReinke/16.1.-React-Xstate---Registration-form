@@ -152,7 +152,7 @@ function FormikApp() {
           type: 'SUBMIT_FORM_COMPLETION'
         });
         resetForm({
-          values:{
+          values: {
             eMail: '',
             firstName: '',
             lastName: '',
@@ -181,7 +181,7 @@ function FormikApp() {
                       <div>
                         <div className="flex flex-col justify-center items-center gap-10">
                           <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                              React/Xstate multi-step form with validation.
+                            React/Xstate multi-step form with validation.
                           </h2>
                           {currentState.matches('enteringEmail.active') && (
                             <div className="grid grid-flow-row gap-5 justify-center">
@@ -220,7 +220,7 @@ function FormikApp() {
                                     Personal Inforamtion
                                   </h2>
                                   <p className="text-start mt-1 text-sm leading-6 text-white">
-                                    Please, provide your personal infromation 
+                                    Please, provide your personal infromation
                                   </p>
                                   <p className="mt-5 text-sm leading-6 text-gray-600">
                                     Please note, next step is impossible until all the fields are
@@ -323,7 +323,7 @@ function FormikApp() {
                                     Contact Inforamtion
                                   </h2>
                                   <p className="text-start mt-1 text-sm leading-6 text-white">
-                                    Please, provide your contact infromation 
+                                    Please, provide your contact infromation
                                   </p>
                                   <p className="mt-5 text-sm leading-6 text-gray-600">
                                     Please note, next step is impossible until all the fields are
@@ -424,8 +424,7 @@ function FormikApp() {
                                       disabled={!formik.isValid || !formik.touched.phoneNumber}
                                       onClick={() => {
                                         send({
-                                          type: 'SUBMIT_CONTACT_INFO'
-                                          ,
+                                          type: 'SUBMIT_CONTACT_INFO',
                                           values: formik.values
                                         });
                                       }}>
@@ -442,9 +441,6 @@ function FormikApp() {
                   ) : (
                     <div>
                       <div className="flex flex-col justify-center items-center gap-8">
-                        <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
-                          {JSON.stringify(currentState.value)}
-                        </p>
                         <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
                           Your're almost done!
                         </h2>
@@ -457,33 +453,25 @@ function FormikApp() {
                             <p className="block text-sm font-medium leading-6 text-gray-300">
                               First name:
                             </p>
-                            <p className="mt-1 text-gray-300">
-                              {currentState.context.userName}
-                            </p>
+                            <p className="mt-1 text-gray-300">{currentState.context.userName}</p>
                           </div>
                           <div className="sm:col-span-2">
                             <p className="block text-sm font-medium leading-6 text-gray-300">
                               Last name:
                             </p>
-                            <p className="mt-1 text-gray-300">
-                              {currentState.context.lastName}
-                            </p>
+                            <p className="mt-1 text-gray-300">{currentState.context.lastName}</p>
                           </div>
                           <div className="sm:col-span-2">
                             <p className="block text-sm font-medium leading-6 text-gray-300">
                               Date of birth:
                             </p>
-                            <p className="mt-1 text-gray-300">
-                              {currentState.context.dateOfBirth}
-                            </p>
+                            <p className="mt-1 text-gray-300">{currentState.context.dateOfBirth}</p>
                           </div>
                           <div className="sm:col-span-2">
                             <p className="block text-sm font-medium leading-6 text-gray-300">
                               Phone number:
                             </p>
-                            <p className="mt-1 text-gray-300">
-                              {currentState.context.phoneNumber}
-                            </p>
+                            <p className="mt-1 text-gray-300">{currentState.context.phoneNumber}</p>
                           </div>
                           <div className="sm:col-span-2">
                             <p className="block text-sm font-medium leading-6 text-gray-300">
@@ -497,25 +485,19 @@ function FormikApp() {
                             <p className="block text-sm font-medium leading-6 text-gray-300">
                               Country:
                             </p>
-                            <p className="mt-1 text-gray-300">
-                              {currentState.context.country}
-                            </p>
+                            <p className="mt-1 text-gray-300">{currentState.context.country}</p>
                           </div>
                           <div className="sm:col-span-2">
                             <p className="block text-sm font-medium leading-6 text-gray-300">
                               City:
                             </p>
-                            <p className="mt-1 text-gray-300">
-                              {currentState.context.city}
-                            </p>
+                            <p className="mt-1 text-gray-300">{currentState.context.city}</p>
                           </div>
                           <div className="sm:col-span-2">
                             <p className="block text-sm font-medium leading-6 text-gray-300">
                               Postal code:
                             </p>
-                            <p className="mt-1 text-gray-300">
-                              {currentState.context.zip}
-                            </p>
+                            <p className="mt-1 text-gray-300">{currentState.context.zip}</p>
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-10 w-[300px] m-auto mt-10">
