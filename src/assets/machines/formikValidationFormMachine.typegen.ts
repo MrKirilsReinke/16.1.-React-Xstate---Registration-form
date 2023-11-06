@@ -17,7 +17,7 @@
         };
         eventsCausingActions: {
           "assignValuesToContext": "SUBMIT_CONTACT_INFO";
-"clearContextFields": "SUBMIT_FORM_COMPLETION";
+"clearContext": "SUBMIT_FORM_COMPLETION";
         };
         eventsCausingDelays: {
           
@@ -28,7 +28,9 @@
         eventsCausingServices: {
           
         };
-        matchesStates: "enteringContactInfo" | "enteringEmail" | "enteringPersonalInfo" | "formCompletion" | "formSubmitted";
+        matchesStates: "enteringContactInfo" | "enteringContactInfo.active" | "enteringEmail" | "enteringEmail.active" | "enteringPersonalInfo" | "enteringPersonalInfo.active" | "formCompletion" | "formSubmitted" | { "enteringContactInfo"?: "active";
+"enteringEmail"?: "active";
+"enteringPersonalInfo"?: "active"; };
         tags: never;
       }
   

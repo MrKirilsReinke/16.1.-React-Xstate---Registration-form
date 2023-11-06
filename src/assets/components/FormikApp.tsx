@@ -152,7 +152,7 @@ function FormikApp() {
           type: 'SUBMIT_FORM_COMPLETION'
         });
         resetForm({
-          values: {
+          values:{
             eMail: '',
             firstName: '',
             lastName: '',
@@ -183,7 +183,7 @@ function FormikApp() {
                           <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
                               React/Xstate multi-step form with validation.
                           </h2>
-                          {currentState.matches('enteringEmail') && (
+                          {currentState.matches('enteringEmail.active') && (
                             <div className="grid grid-flow-row gap-5 justify-center">
                               <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300 mt-5">
                                 To begin registration, enter your e-mail address.
@@ -212,7 +212,7 @@ function FormikApp() {
                               )}
                             </div>
                           )}
-                          {currentState.matches('enteringPersonalInfo') && (
+                          {currentState.matches('enteringPersonalInfo.active') && (
                             <div className="mt-5 space-y-10 divide-y divide-gray-900/10">
                               <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
                                 <div className="px-4 sm:px-0">
