@@ -17,7 +17,7 @@
         };
         eventsCausingActions: {
           "assignValuesToContext": "SUBMIT_CONTACT_INFO";
-"clearContext": "SUBMIT_FORM_COMPLETION";
+"clearContext": "GO_BACK" | "SUBMIT_FORM_COMPLETION";
         };
         eventsCausingDelays: {
           

@@ -9,9 +9,10 @@ type FormikInputProps = {
   onBlur?: (e) => void
   formik: any
   autoComplete?: 'off' | 'on'
+  required: boolean
 }
 
-const FormikInput = ({ autoComplete = 'off', formik, onBlur, placeholder, type = 'text', onChange, name, label, /* id, */ /* field */ /* required = true */ value }: FormikInputProps) => {
+const FormikInput = ({ required, autoComplete = 'off', formik, onBlur, placeholder, type = 'text', onChange, name, label, /* id, */ /* field */ /* required = true */ value }: FormikInputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // const value = e.target.value;
     onChange(e);
@@ -21,6 +22,7 @@ const FormikInput = ({ autoComplete = 'off', formik, onBlur, placeholder, type =
     <label className="block text-sm font-medium leading-6 text-gray-900">
       {label}
       <input
+        required={required}
         autoComplete={autoComplete}
         onBlur={onBlur}
         name={name}

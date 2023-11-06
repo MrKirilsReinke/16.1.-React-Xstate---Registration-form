@@ -173,13 +173,13 @@ function FormikApp() {
             <div className="bg-gray-900 py-16 sm:py-24 h-screen grid justify-center items-center">
               <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 shadow-xl sm:rounded-3xl sm:px-24 xl:py-32">
-                  <p className="absolute mt-1 text-sm leading-6 text-green-500 top-[0px]">
+                  <p className="absolute mt-1 text-sm leading-6 text-green-500 top-[0px] hidden sm:block">
                     (Current step:{JSON.stringify(currentState.value)})
                   </p>
                   {!currentState.matches('formCompletion') ? (
                     !currentState.matches('formSubmitted') && (
                       <div>
-                        <div className="flex flex-col justify-center items-center gap-10">
+                        <div className="flex flex-col justify-center items-center gap-10 sm:gap-4 md:gap-8 lg:gap-12">
                           <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
                             React/Xstate multi-step form with validation.
                           </h2>
@@ -195,6 +195,7 @@ function FormikApp() {
                                 type="email"
                                 validate={validateEmail}
                                 formik={formik}
+                                required={true}
                               />
                               {formik.errors.eMail || !formik.touched.eMail ? (
                                 <div className="text-red-900">{formik.errors.eMail}</div>
@@ -238,6 +239,7 @@ function FormikApp() {
                                           name="firstName"
                                           validate={validateFirstName}
                                           formik={formik}
+                                          required={true}
                                         />
                                         {formik.errors.firstName ? (
                                           <div className="text-red-900 text-sm mt-2">
@@ -253,6 +255,7 @@ function FormikApp() {
                                           name="lastName"
                                           validate={validateLastName}
                                           formik={formik}
+                                          required={true}
                                         />
                                         {formik.errors.lastName ? (
                                           <div className="text-red-900 text-sm mt-2">
@@ -268,6 +271,7 @@ function FormikApp() {
                                           name="dateOfBirth"
                                           validate={validateDateOfBirth}
                                           formik={formik}
+                                          required={true}
                                         />
                                         {formik.errors.dateOfBirth ? (
                                           <div className="text-red-900 text-sm mt-2">
@@ -283,6 +287,7 @@ function FormikApp() {
                                           name="userName"
                                           validate={validateUserName}
                                           formik={formik}
+                                          required={true}
                                         />
                                         {formik.errors.userName ? (
                                           <div className="text-red-900 text-sm mt-2">
@@ -302,7 +307,7 @@ function FormikApp() {
                                       Back
                                     </FormikButton>
                                     <FormikButton
-                                      // disabled={!formik.isValid || !formik.touched.userName}
+                                      disabled={!formik.isValid || !formik.touched.userName}
                                       onClick={() => {
                                         send({
                                           type: 'SUBMIT_PERSONAL_INFO'
@@ -341,6 +346,7 @@ function FormikApp() {
                                           name="phoneNumber"
                                           validate={validatePhoneNumber}
                                           formik={formik}
+                                          required={true}
                                         />
                                         {formik.errors.phoneNumber ? (
                                           <div className="text-red-900 text-sm mt-2">
@@ -356,6 +362,7 @@ function FormikApp() {
                                           name="streetAddress"
                                           validate={validateStreetAddress}
                                           formik={formik}
+                                          required={true}
                                         />
                                         {formik.errors.streetAddress ? (
                                           <div className="text-red-900 text-sm mt-2">
@@ -371,6 +378,7 @@ function FormikApp() {
                                           name="country"
                                           validate={validateCountry}
                                           formik={formik}
+                                          required={true}
                                         />
                                         {formik.errors.country ? (
                                           <div className="text-red-900 text-sm mt-2">
@@ -387,6 +395,7 @@ function FormikApp() {
                                           name="city"
                                           validate={validateCity}
                                           formik={formik}
+                                          required={true}
                                         />
                                         {formik.errors.city ? (
                                           <div className="text-red-900 text-sm mt-2">
@@ -402,6 +411,7 @@ function FormikApp() {
                                           name="zip"
                                           validate={validatePostalCode}
                                           formik={formik}
+                                          required={true}
                                         />
                                         {formik.errors.zip ? (
                                           <div className="text-red-900 text-sm mt-2">
@@ -421,7 +431,7 @@ function FormikApp() {
                                       Back
                                     </FormikButton>
                                     <FormikButton
-                                      // disabled={!formik.isValid || !formik.touched.phoneNumber}
+                                      disabled={!formik.isValid || !formik.touched.phoneNumber}
                                       onClick={() => {
                                         send({
                                           type: 'SUBMIT_CONTACT_INFO',
@@ -445,7 +455,7 @@ function FormikApp() {
                           Your're almost done!
                         </h2>
                         <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
-                          Please, check your competed form one more time and press "Confirm" button
+                          Please, check your completed form one more time and press "Confirm" button
                           to complete your registration.
                         </p>
                       </div>
@@ -457,7 +467,8 @@ function FormikApp() {
                               Personal Inforamtion
                             </h2>
                             <p className="text-start mt-1 text-sm leading-6 text-black">
-                              Please, check your personal information to ensure everything is correct.
+                              Please, check your personal information to ensure everything is
+                              correct.
                             </p>
                           </div>
                           <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
@@ -467,7 +478,7 @@ function FormikApp() {
                                   <p className="block text-sm font-medium leading-6 text-black">
                                     First name:
                                   </p>
-                                  <p className="mt-1 text-black">{currentState.context.userName}</p>
+                                  <p className="mt-1 text-black">{currentState.context.firstName}</p>
                                 </div>
                                 <div className="sm:col-span-3">
                                   <p className="block text-sm font-medium leading-6 text-black">
@@ -487,17 +498,13 @@ function FormikApp() {
                                   <p className="block text-sm font-medium leading-6 text-black">
                                     Username:
                                   </p>
-                                  <p className="mt-1 text-black">
-                                    {currentState.context.userName}
-                                  </p>
+                                  <p className="mt-1 text-black">{currentState.context.userName}</p>
                                 </div>
                                 <div className="sm:col-span-3 sm:col-start-1">
                                   <p className="block text-sm font-medium leading-6 text-black">
                                     E-mail:
                                   </p>
-                                  <p className="mt-1 text-black">
-                                    {currentState.context.eMail}
-                                  </p>
+                                  <p className="mt-1 text-black">{currentState.context.eMail}</p>
                                 </div>
                               </div>
                             </div>
@@ -510,7 +517,8 @@ function FormikApp() {
                               Contact Inforamtion
                             </h2>
                             <p className="text-start mt-1 text-sm leading-6 text-black">
-                            Please, check your contact information to ensure everything is correct.
+                              Please, check your contact information to ensure everything is
+                              correct.
                             </p>
                           </div>
                           <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
@@ -520,53 +528,51 @@ function FormikApp() {
                                   <p className="block text-sm font-medium leading-6 text-black">
                                     Phone number:
                                   </p>
-                                  <p className="mt-1 text-black">{currentState.context.phoneNumber}</p>
+                                  <p className="mt-1 text-black">
+                                    {currentState.context.phoneNumber}
+                                  </p>
                                 </div>
                                 <div className="sm:col-span-3">
                                   <p className="block text-sm font-medium leading-6 text-black">
                                     Street address:
                                   </p>
-                                  <p className="mt-1 text-black">{currentState.context.streetAddress}</p>
+                                  <p className="mt-1 text-black">
+                                    {currentState.context.streetAddress}
+                                  </p>
                                 </div>
                                 <div className="sm:col-span-3">
                                   <p className="block text-sm font-medium leading-6 text-black">
                                     City:
                                   </p>
                                   <p className="mt-1 text-black">
-                                    {currentState.context.dateOfBirth}
+                                    {currentState.context.city}
                                   </p>
                                 </div>
                                 <div className="sm:col-span-3">
                                   <p className="block text-sm font-medium leading-6 text-black">
-                                    State:
+                                    Postal code:
                                   </p>
-                                  <p className="mt-1 text-black">
-                                    {currentState.context.userName}
-                                  </p>
+                                  <p className="mt-1 text-black">{currentState.context.zip}</p>
                                 </div>
                                 <div className="sm:col-span-3 sm:col-start-1">
                                   <p className="block text-sm font-medium leading-6 text-black">
                                     Country:
                                   </p>
-                                  <p className="mt-1 text-black">
-                                    {currentState.context.userName}
-                                  </p>
+                                  <p className="mt-1 text-black">{currentState.context.userName}</p>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="flex flex-col justify-center items-center gap-8">
-                        <div className="grid grid-cols-2 gap-10 w-[300px] m-auto mt-10">
+                        <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                           <FormikButton
                             onClick={() => {
                               send({
                                 type: 'GO_BACK'
                               });
                             }}>
-                            Back
+                                  Back
                           </FormikButton>
                           <FormikButton type="submit">Confirm</FormikButton>
                         </div>

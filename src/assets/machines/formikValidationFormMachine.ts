@@ -24,10 +24,12 @@ const formikValidationFormMachine = createMachine(
       eMail: '',
       firstName: '',
       lastName: '',
-      dateOfBirth: '',
+      // dateOfBirth: '',
+      dateOfBirth: null,
       country: '',
       userName: '',
-      phoneNumber: '',
+      // phoneNumber: '',
+      phoneNumber: null,
       streetAddress: '',
       city: '',
       zip: ''
@@ -82,6 +84,7 @@ const formikValidationFormMachine = createMachine(
                 target: '#formCompletion'
               },
               GO_BACK: {
+                actions: 'clearContext',
                 target: '#enteringPersonalInfo.hist'
               }
             }
@@ -135,10 +138,12 @@ const formikValidationFormMachine = createMachine(
           eMail: '',
           firstName: '',
           lastName: '',
-          dateOfBirth: '',
+          // dateOfBirth: '',
+          dateOfBirth: null,
           country: '',
           userName: '',
-          phoneNumber: '',
+          // phoneNumber: '',
+          phoneNumber: null,
           streetAddress: '',
           city: '',
           zip: ''
