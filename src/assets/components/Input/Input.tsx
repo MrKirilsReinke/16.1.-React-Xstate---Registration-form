@@ -27,7 +27,7 @@ const Input = ({ autoComplete = 'off', formik, onBlur, placeholder, type = 'text
         onBlur={onBlur}
         name={name}
         type={type}
-        className={`mt-2 max-w-[500px] flex-auto rounded-md bg-white/5 px-3.5 py-2 text-white shadow-sm sm:text-sm sm:leading-6 focus:outline-none ${formik.errors[name] ? 'border-2 border-red-800' : 'border-0'}`}
+        className={`mt-2 max-w-[500px] flex-auto rounded-md bg-white/5 px-3.5 py-2 text-white shadow-sm sm:text-sm sm:leading-6 focus:outline-none ${formik.touched[name] && formik.errors[name] ? 'border-2 border-red-800' : 'border-0'}`}
         value={value}
         placeholder={placeholder}
         onChange={handleChange}

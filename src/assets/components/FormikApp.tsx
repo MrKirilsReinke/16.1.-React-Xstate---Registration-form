@@ -147,6 +147,9 @@ function FormikApp() {
         city: '',
         zip: ''
       }}
+      validateOnBlur={false}
+      validateOnChange={true}
+      validateOnMount={true}
       onSubmit={(values: FormValues, { resetForm } /* { setSubmitting } */) => {
         send({
           type: 'SUBMIT_FORM_COMPLETION'
@@ -197,19 +200,21 @@ function FormikApp() {
                                 formik={formik}
                                 required={true}
                               />
-                              {formik.errors.eMail || !formik.touched.eMail ? (
+                              {formik.touched.eMail && formik.errors.eMail /* formik.errors.eMail */ ? (
                                 <div className="text-red-900">{formik.errors.eMail}</div>
                               ) : (
-                                <div className="grid gap-10 w-[300px] m-auto mt-2">
-                                  <FormikButton
-                                    onClick={() => {
-                                      send({
-                                        type: 'SUBMIT_EMAIL_ADDRESS'
-                                      });
-                                    }}>
+                                formik.isValid && (
+                                  <div className="grid gap-10 w-[300px] m-auto mt-2">
+                                    <FormikButton
+                                      onClick={() => {
+                                        send({
+                                          type: 'SUBMIT_EMAIL_ADDRESS'
+                                        });
+                                      }}>
                                     Next
-                                  </FormikButton>
-                                </div>
+                                    </FormikButton>
+                                  </div>
+                                )
                               )}
                             </div>
                           )}
@@ -245,7 +250,7 @@ function FormikApp() {
                                           <div className="text-red-900 text-sm mt-2">
                                             {formik.errors.firstName}
                                           </div>
-                                        ) : null}
+                                        ) : undefined}
                                       </div>
                                       <div className="sm:col-span-3">
                                         <Field
@@ -277,7 +282,7 @@ function FormikApp() {
                                           <div className="text-red-900 text-sm mt-2">
                                             {formik.errors.dateOfBirth}
                                           </div>
-                                        ) : null}
+                                        ) : undefined}
                                       </div>
                                       <div className="sm:col-span-3 sm:col-start-1">
                                         <Field
@@ -293,7 +298,7 @@ function FormikApp() {
                                           <div className="text-red-900 text-sm mt-2">
                                             {formik.errors.userName}
                                           </div>
-                                        ) : null}
+                                        ) : undefined}
                                       </div>
                                     </div>
                                   </div>
@@ -352,7 +357,7 @@ function FormikApp() {
                                           <div className="text-red-900 text-sm mt-2">
                                             {formik.errors.phoneNumber}
                                           </div>
-                                        ) : null}
+                                        ) : undefined}
                                       </div>
                                       <div className="sm:col-span-3 sm:col-start-1">
                                         <Field
@@ -368,7 +373,7 @@ function FormikApp() {
                                           <div className="text-red-900 text-sm mt-2">
                                             {formik.errors.streetAddress}
                                           </div>
-                                        ) : null}
+                                        ) : undefined}
                                       </div>
                                       <div className="sm:col-span-2 sm:col-start-1">
                                         <Field
@@ -384,7 +389,7 @@ function FormikApp() {
                                           <div className="text-red-900 text-sm mt-2">
                                             {formik.errors.country}
                                           </div>
-                                        ) : null}
+                                        ) : undefined}
                                       </div>
 
                                       <div className="sm:col-span-2">
@@ -401,7 +406,7 @@ function FormikApp() {
                                           <div className="text-red-900 text-sm mt-2">
                                             {formik.errors.city}
                                           </div>
-                                        ) : null}
+                                        ) : undefined}
                                       </div>
                                       <div className="sm:col-span-2">
                                         <Field
@@ -417,7 +422,7 @@ function FormikApp() {
                                           <div className="text-red-900 text-sm mt-2">
                                             {formik.errors.zip}
                                           </div>
-                                        ) : null}
+                                        ) : undefined}
                                       </div>
                                     </div>
                                   </div>
