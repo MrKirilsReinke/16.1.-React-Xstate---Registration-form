@@ -27,7 +27,7 @@ const FormikInput = ({ required, autoComplete = 'off', formik, onBlur, placehold
         onBlur={onBlur}
         name={name}
         type={type}
-        className={`mt-2 block w-full rounded-md p-1.5 text-gray-900 placeholder:text-gray-400 shadow-sm ${formik.errors[name] ? 'border-2 border-red-800' : 'ring-1 ring-inset ring-gray-300 border-0'} sm:text-sm sm:leading-6`}
+        className={`mt-2 block w-full rounded-md p-1.5 text-gray-900 placeholder:text-gray-400 shadow-sm ${formik.touched[name] && formik.errors[name] ? 'border-2 border-red-800' : 'ring-1 ring-inset ring-gray-300 border-0'} sm:text-sm sm:leading-6`}
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
