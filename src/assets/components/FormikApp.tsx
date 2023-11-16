@@ -16,7 +16,7 @@ interface FormValues {
   country: string;
   streetAddress: string;
   city: string;
-  zip: '';
+  zip: string;
 }
 
 function FormikApp() {
@@ -25,7 +25,7 @@ function FormikApp() {
     devTools: true
   });
 
-  const validateEmail = value => {
+  const validateEmail = (value: string) => {
     let error;
 
     if (!value) {
@@ -36,7 +36,7 @@ function FormikApp() {
     return error;
   };
 
-  const validateFirstName = value => {
+  const validateFirstName = (value: string) => {
     let error;
 
     if (!value) {
@@ -47,7 +47,7 @@ function FormikApp() {
     return error;
   };
 
-  const validateLastName = value => {
+  const validateLastName = (value: string) => {
     let error;
 
     if (!value) {
@@ -58,30 +58,18 @@ function FormikApp() {
     return error;
   };
 
-  const validateDateOfBirth = value => {
+  const validateDateOfBirth = (value: string) => {
     let error;
 
     if (!value) {
       error = 'Fill out this field';
-    } else {
-      const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/;
-      if (!dateRegex.test(value)) {
-        error = 'Please enter a valid date in the format dd.mm.yyyy';
-      }
+    } else if (!/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/i.test(value)) {
+      error = 'Please enter a valid date in the format dd.mm.yyyy';
     }
     return error;
   };
 
-  const validateCountry = value => {
-    let error;
-
-    if (!value) {
-      error = 'Fill out this field';
-    }
-    return error;
-  };
-
-  const validateUserName = value => {
+  const validateUserName = (value: string) => {
     let error;
 
     if (!value) {
@@ -92,7 +80,7 @@ function FormikApp() {
     return error;
   };
 
-  const validatePhoneNumber = value => {
+  const validatePhoneNumber = (value: string) => {
     let error;
 
     if (!value) {
@@ -103,7 +91,7 @@ function FormikApp() {
     return error;
   };
 
-  const validateStreetAddress = value => {
+  const validateStreetAddress = (value: string) => {
     let error;
 
     if (!value) {
@@ -111,17 +99,30 @@ function FormikApp() {
     }
     return error;
   };
-
-  const validateCity = value => {
+  
+  const validateCountry = (value: string) => {
     let error;
 
     if (!value) {
       error = 'Fill out this field';
+    } else if (/\d/.test(value)) {
+      error = 'Last name cannot contain numbers';
     }
     return error;
   };
 
-  const validatePostalCode = value => {
+  const validateCity = (value: string) => {
+    let error;
+
+    if (!value) {
+      error = 'Fill out this field';
+    } else if (/\d/.test(value)) {
+      error = 'Last name cannot contain numbers';
+    }
+    return error;
+  };
+
+  const validatePostalCode = (value: string) => {
     const postalCodeRegex = /^[A-Za-z]{2}-\d{4}$/;
     const sanitizedValue = value.trim();
 
@@ -130,7 +131,7 @@ function FormikApp() {
     } else if (!postalCodeRegex.test(sanitizedValue)) {
       return 'Postal code must be in the format "two letters - 4 digits"';
     }
-    return null;
+    return undefined;
   };
 
   return (
@@ -147,7 +148,7 @@ function FormikApp() {
         city: '',
         zip: ''
       }}
-      validateOnBlur={false}
+      validateOnBlur={true}
       validateOnChange={true}
       validateOnMount={true}
       onSubmit={(values: FormValues, { resetForm } /* { setSubmitting } */) => {
@@ -170,7 +171,7 @@ function FormikApp() {
         });
       }}>
       {formik => {
-        console.log('formik props', formik);
+        console.log('formik props', formik, 'formik values', formik.values);
         return (
           <Form>
             <div className="bg-gray-900 py-16 sm:py-24 h-screen grid justify-center items-center">
@@ -199,6 +200,7 @@ function FormikApp() {
                                 validate={validateEmail}
                                 formik={formik}
                                 required={true}
+                                onChange={formik.handleChange}
                               />
                               {formik.touched.eMail &&
                               formik.errors.eMail /* formik.errors.eMail */ ? (
@@ -244,7 +246,7 @@ function FormikApp() {
                                           placeholder="First name"
                                           name="firstName"
                                           validate={validateFirstName}
-                                          formik={formik}
+                                          formik={formik} // for error
                                           required={true}
                                         />
                                         {formik.touched.firstName && formik.errors.firstName ? (
@@ -260,14 +262,14 @@ function FormikApp() {
                                           placeholder="Last name"
                                           name="lastName"
                                           validate={validateLastName}
-                                          formik={formik}
+                                          formik={formik} // for error
                                           required={true}
                                         />
                                         {formik.touched.lastName && formik.errors.lastName ? (
                                           <div className="text-red-900 text-sm mt-2">
                                             {formik.errors.lastName}
                                           </div>
-                                        ) : null}
+                                        ) : undefined}
                                       </div>
                                       <div className="sm:col-span-3">
                                         <Field
@@ -276,7 +278,7 @@ function FormikApp() {
                                           placeholder="Example: 06.03.2007"
                                           name="dateOfBirth"
                                           validate={validateDateOfBirth}
-                                          formik={formik}
+                                          formik={formik} // for error
                                           required={true}
                                         />
                                         {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
@@ -292,7 +294,7 @@ function FormikApp() {
                                           placeholder="Username"
                                           name="userName"
                                           validate={validateUserName}
-                                          formik={formik}
+                                          formik={formik} // for error
                                           required={true}
                                         />
                                         {formik.touched.userName && formik.errors.userName ? (
@@ -314,11 +316,10 @@ function FormikApp() {
                                     </FormikButton>
                                     <FormikButton
                                       disabled={
-                                        (!formik.touched.firstName || formik.errors.firstName ||
-                                          !formik.touched.lastName || formik.errors.lastName ||
-                                          !formik.touched.dateOfBirth || formik.errors.dateOfBirth ||
-                                          !formik.touched.userName || formik.errors.userName) &&
-                                        !formik.isValid
+                                        (!formik.touched.firstName &&
+                                      !formik.touched.lastName &&
+                                      !formik.touched.dateOfBirth &&
+                                      !formik.touched.userName) || !formik.isValid
                                       }
                                       onClick={() => {
                                         send({
@@ -479,7 +480,6 @@ function FormikApp() {
                           to complete your registration.
                         </p>
                       </div>
-
                       <div className="mt-5 space-y-10 divide-y divide-gray-900/10 bg-white p-8 shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl">
                         <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3 mt-10">
                           <div className="px-4 sm:px-0">
@@ -532,7 +532,6 @@ function FormikApp() {
                             </div>
                           </div>
                         </div>
-
                         <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3 py-10">
                           <div className="px-4 sm:px-0">
                             <h2 className="text-start text-lg font-semibold leading-7 text-black">
@@ -584,7 +583,6 @@ function FormikApp() {
                             </div>
                           </div>
                         </div>
-
                         <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                           <FormikButton
                             onClick={() => {
