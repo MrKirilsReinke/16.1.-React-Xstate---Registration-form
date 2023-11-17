@@ -99,7 +99,7 @@ function FormikApp() {
     }
     return error;
   };
-  
+
   const validateCountry = (value: string) => {
     let error;
 
@@ -317,9 +317,10 @@ function FormikApp() {
                                     <FormikButton
                                       disabled={
                                         (!formik.touched.firstName &&
-                                      !formik.touched.lastName &&
-                                      !formik.touched.dateOfBirth &&
-                                      !formik.touched.userName) || !formik.isValid
+                                          !formik.touched.lastName &&
+                                          !formik.touched.dateOfBirth &&
+                                          !formik.touched.userName) ||
+                                        !formik.isValid
                                       }
                                       onClick={() => {
                                         send({
@@ -358,7 +359,7 @@ function FormikApp() {
                                           placeholder="Phone number"
                                           name="phoneNumber"
                                           validate={validatePhoneNumber}
-                                          formik={formik}
+                                          formik={formik} // for error
                                           required={true}
                                         />
                                         {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
@@ -374,7 +375,7 @@ function FormikApp() {
                                           placeholder="Street address"
                                           name="streetAddress"
                                           validate={validateStreetAddress}
-                                          formik={formik}
+                                          formik={formik} // for error
                                           required={true}
                                         />
                                         {formik.touched.streetAddress &&
@@ -391,7 +392,7 @@ function FormikApp() {
                                           placeholder="Country"
                                           name="country"
                                           validate={validateCountry}
-                                          formik={formik}
+                                          formik={formik} // for error
                                           required={true}
                                         />
                                         {formik.touched.country && formik.errors.country ? (
@@ -408,7 +409,7 @@ function FormikApp() {
                                           placeholder="City"
                                           name="city"
                                           validate={validateCity}
-                                          formik={formik}
+                                          formik={formik} // for error
                                           required={true}
                                         />
                                         {formik.touched.city && formik.errors.city ? (
@@ -424,7 +425,7 @@ function FormikApp() {
                                           placeholder="Posatal code"
                                           name="zip"
                                           validate={validatePostalCode}
-                                          formik={formik}
+                                          formik={formik} // for error
                                           required={true}
                                         />
                                         {formik.touched.zip && formik.errors.zip ? (
