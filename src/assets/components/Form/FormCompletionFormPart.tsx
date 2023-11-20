@@ -1,12 +1,8 @@
+import FormikProps from '../../types/FormikProps';
 import FormikButton from '../Button/FormikButton';
 
-interface FormikProps {
-  send: any;
-  currentState: any;
-}
-
 function FormCompletionFormPart({ send, currentState }: FormikProps) {
-
+  
   return (
     <div>
       <div className="flex flex-col justify-center items-center gap-8">

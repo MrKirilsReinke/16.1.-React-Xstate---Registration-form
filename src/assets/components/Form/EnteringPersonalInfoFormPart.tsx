@@ -1,11 +1,7 @@
+import FormikProps from '../../types/FormikProps';
 import FormikInput from '../Input/FormikInput';
 import FormikButton from '../Button/FormikButton';
 import { Field } from 'formik';
-
-interface FormikProps {
-  formik: any;
-  send: any;
-}
 
 function EnteringPersonalInfoFormPart({ formik, send }: FormikProps) {
   
@@ -67,7 +63,8 @@ function EnteringPersonalInfoFormPart({ formik, send }: FormikProps) {
                   placeholder="First name"
                   name="firstName"
                   validate={validationWithNoDigits}
-                  formik={formik} // for error
+                  formikError={formik.errors}
+                  formikTouched={formik.touched}
                   required={true}
                 />
                 {formik.touched.firstName && formik.errors.firstName ? (
@@ -83,7 +80,8 @@ function EnteringPersonalInfoFormPart({ formik, send }: FormikProps) {
                   placeholder="Last name"
                   name="lastName"
                   validate={validationWithNoDigits}
-                  formik={formik} // for error
+                  formikError={formik.errors}
+                  formikTouched={formik.touched}
                   required={true}
                 />
                 {formik.touched.lastName && formik.errors.lastName ? (
@@ -99,7 +97,8 @@ function EnteringPersonalInfoFormPart({ formik, send }: FormikProps) {
                   placeholder="Example: 06.03.2007"
                   name="dateOfBirth"
                   validate={validateDateOfBirth}
-                  formik={formik} // for error
+                  formikError={formik.errors}
+                  formikTouched={formik.touched}
                   required={true}
                 />
                 {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
@@ -115,7 +114,8 @@ function EnteringPersonalInfoFormPart({ formik, send }: FormikProps) {
                   placeholder="Username"
                   name="userName"
                   validate={validateUserName}
-                  formik={formik} // for error
+                  formikError={formik.errors}
+                  formikTouched={formik.touched}
                   required={true}
                 />
                 {formik.touched.userName && formik.errors.userName ? (

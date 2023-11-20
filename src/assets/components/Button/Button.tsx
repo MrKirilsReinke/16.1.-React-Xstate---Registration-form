@@ -1,10 +1,4 @@
-import { ReactNode } from 'react';
-
-type ButtonProps = {
-  onClick?: ( type: string ) => void 
-  children: ReactNode
-  type?: 'button' | 'submit'
-}
+import ButtonProps from '../../types/ButtonProps';
 
 const Button = ({ onClick, children, type = 'button' }: ButtonProps) => {
   const handleClick = () => {

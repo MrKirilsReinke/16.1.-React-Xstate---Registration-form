@@ -1,11 +1,7 @@
+import FormikProps from '../../types/FormikProps';
 import { Field } from 'formik';
 import Input from '../Input/Input';
 import FormikButton from '../Button/FormikButton';
-
-interface FormikProps {
-  formik: any;
-  send: any;
-}
 
 function EnteringEmailFormPart({ formik, send }: FormikProps) {
   
@@ -31,11 +27,12 @@ function EnteringEmailFormPart({ formik, send }: FormikProps) {
         name="eMail"
         type="email"
         validate={validateEmail}
-        formik={formik}
+        formikError={formik.errors}
+        formikTouched={formik.touched}
         required={true}
       />
       {formik.touched.eMail &&
-    formik.errors.eMail /* formik.errors.eMail */ ? (
+    formik.errors.eMail ? (
           <div className="text-red-900">{formik.errors.eMail}</div>
         ) : (
           formik.isValid && (

@@ -1,14 +1,10 @@
+import FormikProps from '../../types/FormikProps';
 import FormikInput from '../Input/FormikInput';
 import FormikButton from '../Button/FormikButton';
 import { Field } from 'formik';
 
-interface FormikProps {
-  formik: any;
-  send: any;
-}
-
 function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
-    
+  
   const validationWithNoDigits = (value: string) => {
     let error;
 
@@ -57,14 +53,13 @@ function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
       <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
         <div className="px-4 sm:px-0">
           <h2 className="text-start text-lg font-semibold leading-7 text-white">
-          Contact Inforamtion
+            Contact Inforamtion
           </h2>
           <p className="text-start mt-1 text-sm leading-6 text-white">
-          Please, provide your contact infromation
+            Please, provide your contact infromation
           </p>
           <p className="mt-5 text-sm leading-6 text-gray-600">
-          Please note, next step is impossible until all the fields are
-          filled out correctly.
+            Please note, next step is impossible until all the fields are filled out correctly.
           </p>
         </div>
         <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
@@ -77,13 +72,12 @@ function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
                   placeholder="Phone number"
                   name="phoneNumber"
                   validate={validatePhoneNumber}
-                  formik={formik} // for error
+                  formikError={formik.errors}
+                  formikTouched={formik.touched}
                   required={true}
                 />
                 {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-                  <div className="text-red-900 text-sm mt-2">
-                    {formik.errors.phoneNumber}
-                  </div>
+                  <div className="text-red-900 text-sm mt-2">{formik.errors.phoneNumber}</div>
                 ) : undefined}
               </div>
               <div className="sm:col-span-3 sm:col-start-1">
@@ -93,15 +87,13 @@ function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
                   placeholder="Street address"
                   name="streetAddress"
                   validate={validateStreetAddress}
-                  formik={formik} // for error
+                  formikError={formik.errors}
+                  formikTouched={formik.touched}
                   required={true}
                 />
-                {formik.touched.streetAddress &&
-              formik.errors.streetAddress ? (
-                    <div className="text-red-900 text-sm mt-2">
-                      {formik.errors.streetAddress}
-                    </div>
-                  ) : undefined}
+                {formik.touched.streetAddress && formik.errors.streetAddress ? (
+                  <div className="text-red-900 text-sm mt-2">{formik.errors.streetAddress}</div>
+                ) : undefined}
               </div>
               <div className="sm:col-span-2 sm:col-start-1">
                 <Field
@@ -110,13 +102,12 @@ function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
                   placeholder="Country"
                   name="country"
                   validate={validationWithNoDigits}
-                  formik={formik} // for error
+                  formikError={formik.errors}
+                  formikTouched={formik.touched}
                   required={true}
                 />
                 {formik.touched.country && formik.errors.country ? (
-                  <div className="text-red-900 text-sm mt-2">
-                    {formik.errors.country}
-                  </div>
+                  <div className="text-red-900 text-sm mt-2">{formik.errors.country}</div>
                 ) : undefined}
               </div>
               <div className="sm:col-span-2">
@@ -126,13 +117,12 @@ function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
                   placeholder="City"
                   name="city"
                   validate={validationWithNoDigits}
-                  formik={formik} // for error
+                  formikError={formik.errors}
+                  formikTouched={formik.touched}
                   required={true}
                 />
                 {formik.touched.city && formik.errors.city ? (
-                  <div className="text-red-900 text-sm mt-2">
-                    {formik.errors.city}
-                  </div>
+                  <div className="text-red-900 text-sm mt-2">{formik.errors.city}</div>
                 ) : undefined}
               </div>
               <div className="sm:col-span-2">
@@ -142,13 +132,12 @@ function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
                   placeholder="Posatal code"
                   name="zip"
                   validate={validatePostalCode}
-                  formik={formik} // for error
+                  formikError={formik.errors}
+                  formikTouched={formik.touched}
                   required={true}
                 />
                 {formik.touched.zip && formik.errors.zip ? (
-                  <div className="text-red-900 text-sm mt-2">
-                    {formik.errors.zip}
-                  </div>
+                  <div className="text-red-900 text-sm mt-2">{formik.errors.zip}</div>
                 ) : undefined}
               </div>
             </div>
@@ -160,16 +149,16 @@ function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
                   type: 'GO_BACK'
                 });
               }}>
-            Back
+              Back
             </FormikButton>
             <FormikButton
               disabled={
                 (!formik.touched.phoneNumber &&
-                !formik.touched.streetAddress &&
-                !formik.touched.country &&
-                !formik.touched.city &&
-                !formik.touched.zip) ||
-              !formik.isValid
+                  !formik.touched.streetAddress &&
+                  !formik.touched.country &&
+                  !formik.touched.city &&
+                  !formik.touched.zip) ||
+                !formik.isValid
               }
               onClick={() => {
                 send({
@@ -177,7 +166,7 @@ function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
                   values: formik.values
                 });
               }}>
-            Next
+              Next
             </FormikButton>
           </div>
         </div>

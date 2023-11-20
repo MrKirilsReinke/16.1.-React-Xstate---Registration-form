@@ -1,10 +1,8 @@
+import FormikProps from '../../types/FormikProps';
 import FormikButton from '../Button/FormikButton';
 
-interface FormikProps {
-  send: any;
-}
-
 function FormSubmittedFormPart({ send }: FormikProps) {
+  
   return (
     <div className="flex flex-col justify-center items-center">
       <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
