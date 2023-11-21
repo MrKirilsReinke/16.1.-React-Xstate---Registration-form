@@ -1,16 +1,16 @@
-import FormValues from '../types/FormValues';
-import formikValidationFormMachine from '../machines/formikValidationFormMachine';
+import FormValues from '../../types/FormValues';
+import validationFormMachine from '../../machines/validationFormMachine';
 import { useMachine } from '@xstate/react';
 import { Formik, Form } from 'formik';
-import EnteringEmailFormPart from './Form/EnteringEmailFormPart';
-import EnteringPersonalInfoFormPart from './Form/EnteringPersonalInfoFormPart';
-import EnteringContactInfoFormPart from './Form/EnteringContactInfoFormPart';
-import FormCompletionFormPart from './Form/FormCompletionFormPart';
-import FormSubmittedFormPart from './Form/FormSubmittedFormPart';
-import Svg from '../images/Svg';
+import EnteringEmailFormPart from './EnteringEmailFormPart';
+import EnteringPersonalInfoFormPart from './EnteringPersonalInfoFormPart';
+import EnteringContactInfoFormPart from './EnteringContactInfoFormPart';
+import FormCompletionFormPart from './FormCompletionFormPart';
+import FormSubmittedFormPart from './FormSubmittedFormPart';
+import Svg from '../../images/Svg';
 
-function FormikApp() {
-  const [currentState, send] = useMachine(formikValidationFormMachine, {
+function FormApp() {
+  const [currentState, send] = useMachine(validationFormMachine, {
     services: {},
     devTools: true
   });
@@ -87,4 +87,4 @@ function FormikApp() {
   );
 }
 
-export default FormikApp;
+export default FormApp;

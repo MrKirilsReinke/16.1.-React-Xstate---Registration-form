@@ -1,7 +1,8 @@
-import FormikProps from '../../types/FormikProps';
-import FormikButton from '../Button/FormikButton';
+import { Typegen0 } from '../../machines/validationFormMachine.typegen';
+import FormProps from '../../types/FormProps';
+import Button from '../Button/Button';
 
-function FormCompletionFormPart({ send, currentState }: FormikProps) {
+function FormCompletionFormPart({ send, currentState }: FormProps<Typegen0>) {
   
   return (
     <div>
@@ -33,34 +34,34 @@ function FormCompletionFormPart({ send, currentState }: FormikProps) {
                   First name:
                   </p>
                   <p className="mt-1 text-black">
-                    {currentState.context.firstName}
+                    {currentState?.context.firstName}
                   </p>
                 </div>
                 <div className="sm:col-span-3">
                   <p className="block text-sm font-medium leading-6 text-black">
                   Last name:
                   </p>
-                  <p className="mt-1 text-black">{currentState.context.lastName}</p>
+                  <p className="mt-1 text-black">{currentState?.context.lastName}</p>
                 </div>
                 <div className="sm:col-span-3">
                   <p className="block text-sm font-medium leading-6 text-black">
                   Date of birth:
                   </p>
                   <p className="mt-1 text-black">
-                    {currentState.context.dateOfBirth}
+                    {currentState?.context.dateOfBirth}
                   </p>
                 </div>
                 <div className="sm:col-span-3 sm:col-start-1">
                   <p className="block text-sm font-medium leading-6 text-black">
                   Username:
                   </p>
-                  <p className="mt-1 text-black">{currentState.context.userName}</p>
+                  <p className="mt-1 text-black">{currentState?.context.userName}</p>
                 </div>
                 <div className="sm:col-span-3 sm:col-start-1">
                   <p className="block text-sm font-medium leading-6 text-black">
                   E-mail:
                   </p>
-                  <p className="mt-1 text-black">{currentState.context.eMail}</p>
+                  <p className="mt-1 text-black">{currentState?.context.eMail}</p>
                 </div>
               </div>
             </div>
@@ -84,7 +85,7 @@ function FormCompletionFormPart({ send, currentState }: FormikProps) {
                   Phone number:
                   </p>
                   <p className="mt-1 text-black">
-                    {currentState.context.phoneNumber}
+                    {currentState?.context.phoneNumber}
                   </p>
                 </div>
                 <div className="sm:col-span-3">
@@ -92,41 +93,41 @@ function FormCompletionFormPart({ send, currentState }: FormikProps) {
                   Street address:
                   </p>
                   <p className="mt-1 text-black">
-                    {currentState.context.streetAddress}
+                    {currentState?.context.streetAddress}
                   </p>
                 </div>
                 <div className="sm:col-span-3">
                   <p className="block text-sm font-medium leading-6 text-black">
                   City:
                   </p>
-                  <p className="mt-1 text-black">{currentState.context.city}</p>
+                  <p className="mt-1 text-black">{currentState?.context.city}</p>
                 </div>
                 <div className="sm:col-span-3">
                   <p className="block text-sm font-medium leading-6 text-black">
                   Postal code:
                   </p>
-                  <p className="mt-1 text-black">{currentState.context.zip}</p>
+                  <p className="mt-1 text-black">{currentState?.context.zip}</p>
                 </div>
                 <div className="sm:col-span-3 sm:col-start-1">
                   <p className="block text-sm font-medium leading-6 text-black">
                   Country:
                   </p>
-                  <p className="mt-1 text-black">{currentState.context.userName}</p>
+                  <p className="mt-1 text-black">{currentState?.context.userName}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
-          <FormikButton
+          <Button
             onClick={() => {
               send({
                 type: 'GO_BACK'
               });
             }}>
           Back
-          </FormikButton>
-          <FormikButton type="submit">Confirm</FormikButton>
+          </Button>
+          <Button type="submit">Confirm</Button>
         </div>
       </div>
     </div>

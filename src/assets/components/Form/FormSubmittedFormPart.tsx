@@ -1,7 +1,8 @@
-import FormikProps from '../../types/FormikProps';
-import FormikButton from '../Button/FormikButton';
+import { Typegen0 } from '../../machines/validationFormMachine.typegen';
+import FormProps from '../../types/FormProps';
+import Button from '../Button/Button';
 
-function FormSubmittedFormPart({ send }: FormikProps) {
+function FormSubmittedFormPart({ send }: FormProps<Typegen0>) {
   
   return (
     <div className="flex flex-col justify-center items-center">
@@ -12,7 +13,7 @@ function FormSubmittedFormPart({ send }: FormikProps) {
       Congratulations! You've successfully finished your registartion.
       </p>
       <div className="grid gap-10 w-[300px] m-auto mt-10">
-        <FormikButton
+        <Button
           type="reset"
           onClick={() => {
             send({
@@ -20,7 +21,7 @@ function FormSubmittedFormPart({ send }: FormikProps) {
             });
           }}>
         Return to the beginning
-        </FormikButton>
+        </Button>
       </div>
     </div>
   );

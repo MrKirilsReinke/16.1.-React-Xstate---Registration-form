@@ -1,9 +1,10 @@
-import FormikProps from '../../types/FormikProps';
-import FormikInput from '../Input/FormikInput';
-import FormikButton from '../Button/FormikButton';
+import FormProps from '../../types/FormProps';
+import FormInput from '../Input/FormInput';
+import Button from '../Button/Button';
 import { Field } from 'formik';
+import { Typegen0 } from '../../machines/validationFormMachine.typegen';
 
-function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
+function EnteringContactInfoFormPart({ formik, send }: FormProps<Typegen0>) {
   
   const validationWithNoDigits = (value: string) => {
     let error;
@@ -67,107 +68,107 @@ function EnteringContactInfoFormPart({ formik, send }: FormikProps) {
             <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3">
                 <Field
-                  as={FormikInput}
+                  as={FormInput}
                   label="Phone number"
                   placeholder="Phone number"
                   name="phoneNumber"
                   validate={validatePhoneNumber}
-                  formikError={formik.errors}
-                  formikTouched={formik.touched}
+                  formikError={formik?.errors}
+                  formikTouched={formik?.touched}
                   required={true}
                 />
-                {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+                {formik?.touched.phoneNumber && formik.errors.phoneNumber ? (
                   <div className="text-red-900 text-sm mt-2">{formik.errors.phoneNumber}</div>
                 ) : undefined}
               </div>
               <div className="sm:col-span-3 sm:col-start-1">
                 <Field
-                  as={FormikInput}
+                  as={FormInput}
                   label="Street address"
                   placeholder="Street address"
                   name="streetAddress"
                   validate={validateStreetAddress}
-                  formikError={formik.errors}
-                  formikTouched={formik.touched}
+                  formikError={formik?.errors}
+                  formikTouched={formik?.touched}
                   required={true}
                 />
-                {formik.touched.streetAddress && formik.errors.streetAddress ? (
+                {formik?.touched.streetAddress && formik.errors.streetAddress ? (
                   <div className="text-red-900 text-sm mt-2">{formik.errors.streetAddress}</div>
                 ) : undefined}
               </div>
               <div className="sm:col-span-2 sm:col-start-1">
                 <Field
-                  as={FormikInput}
+                  as={FormInput}
                   label="Country"
                   placeholder="Country"
                   name="country"
                   validate={validationWithNoDigits}
-                  formikError={formik.errors}
-                  formikTouched={formik.touched}
+                  formikError={formik?.errors}
+                  formikTouched={formik?.touched}
                   required={true}
                 />
-                {formik.touched.country && formik.errors.country ? (
+                {formik?.touched.country && formik.errors.country ? (
                   <div className="text-red-900 text-sm mt-2">{formik.errors.country}</div>
                 ) : undefined}
               </div>
               <div className="sm:col-span-2">
                 <Field
-                  as={FormikInput}
+                  as={FormInput}
                   label="City"
                   placeholder="City"
                   name="city"
                   validate={validationWithNoDigits}
-                  formikError={formik.errors}
-                  formikTouched={formik.touched}
+                  formikError={formik?.errors}
+                  formikTouched={formik?.touched}
                   required={true}
                 />
-                {formik.touched.city && formik.errors.city ? (
+                {formik?.touched.city && formik.errors.city ? (
                   <div className="text-red-900 text-sm mt-2">{formik.errors.city}</div>
                 ) : undefined}
               </div>
               <div className="sm:col-span-2">
                 <Field
-                  as={FormikInput}
+                  as={FormInput}
                   label="Postal code"
                   placeholder="Posatal code"
                   name="zip"
                   validate={validatePostalCode}
-                  formikError={formik.errors}
-                  formikTouched={formik.touched}
+                  formikError={formik?.errors}
+                  formikTouched={formik?.touched}
                   required={true}
                 />
-                {formik.touched.zip && formik.errors.zip ? (
+                {formik?.touched.zip && formik.errors.zip ? (
                   <div className="text-red-900 text-sm mt-2">{formik.errors.zip}</div>
                 ) : undefined}
               </div>
             </div>
           </div>
           <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
-            <FormikButton
+            <Button
               onClick={() => {
                 send({
                   type: 'GO_BACK'
                 });
               }}>
               Back
-            </FormikButton>
-            <FormikButton
+            </Button>
+            <Button
               disabled={
-                (!formik.touched.phoneNumber &&
-                  !formik.touched.streetAddress &&
-                  !formik.touched.country &&
-                  !formik.touched.city &&
-                  !formik.touched.zip) ||
+                (!formik?.touched.phoneNumber &&
+                  !formik?.touched.streetAddress &&
+                  !formik?.touched.country &&
+                  !formik?.touched.city &&
+                  !formik?.touched.zip) ||
                 !formik.isValid
               }
               onClick={() => {
                 send({
                   type: 'SUBMIT_CONTACT_INFO',
-                  values: formik.values
+                  values: formik?.values
                 });
               }}>
               Next
-            </FormikButton>
+            </Button>
           </div>
         </div>
       </div>

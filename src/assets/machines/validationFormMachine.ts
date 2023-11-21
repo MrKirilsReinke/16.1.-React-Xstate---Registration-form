@@ -1,9 +1,9 @@
 import { createMachine, assign } from 'xstate';
 
-const formikValidationFormMachine = createMachine(
+const validationFormMachine = createMachine(
   {
     /** @xstate-layout N4IgpgJg5mDOIC5QDcCGAbAlhVAXTA9gHYBiBATgLYCyqAxgBaZFgB0AZhZQDIGoSQAxAGEASgFEAggBVxAfQBy4gOpyAqgGVxohZOriA2gAYAuolAAHArEz5i5kAA9EAWgCMAZgBMrAJwAOADY3AFYQ-18Q3y9orwAaEABPRF9fViD-AHZfTKijfzc3Lw8AXxKEtCwcO1IuWkZmNjAiXDByZig1WDaFVEowQXEFWVEASQUAcXUtUUU9Q1MHKxsah2cEN18PVi8vEIAWTP39o28wrYTkhBd9wL8vDN9AowOjNxeyioxsPEJaqnqTBYrGarXaRE63XIvX6gg0agAQtRRtJpto5vpjGYkCBlrY-mtEB5Aj4vJkSYF-P4QjF-F5DpcUmkMtlcr58oV6Z8QJUfjUyAD6ECmi02h1xJRUJh0INhtpxlNxNRJKNuHJJAARDUSDQaLFLaz4+w49aBdmsTJeTweLL5AIhQKMhAhNysNyBDxFYpBek2h3c3nVP4CmhCxog0XgqASqUy+FIlFyJUqtWa7XiXX6nF41YmxAhI5+d77A5eIz7IoeTJO3ZGN2pEs5d0eSKRAPfIPEEOA8OgsUQgAKDGIYAUAFdKAAjNqykYKuQDgASAHklIo1NQEdos5ZDbnQOsPC9WFFiVSXc8ng6nVXXR4PBejEZMm9Am-21Vfl26mHgX2o0OI7jlOM7xsiqJLqu8gKBuW6iDuuJ7gSebXPSrCHIEIQvHslokm4DJJIgbh0js+HEUebz+HaXhlOUIBEAQAjwDigZfv8oYNCwBorMhB6uPeaS5LcVpuJkESnG4TruB4+ysFWjy3OELy+B+fLBj+nFsJwVC8PwkDcUaRCEqhviukJeGieJnpOqkFpiWJBZGA8VrBKpnbsT2f6Rh0XQ9H0YAGfuThEfsgm+CcHo5KF7LxIRCC2Zk9mZDaLyHA2blsd2v4imC4qStKgW8cFCB4aw+TZN4-gyfsMS+E6+GZOh2H5HST63IlGX8hpwoRrlg7DiwwHTuQhXGnxCAPmkXiUuSxIVslZYhDWhzoeSRy5EeIRVoE+y0SUQA */
-    id: 'formikValidationFormMachine',
+    id: 'validationFormMachine',
     predictableActionArguments: true,
     preserveActionOrder: true,
     initial: 'enteringEmail',
@@ -32,7 +32,7 @@ const formikValidationFormMachine = createMachine(
       city: '',
       zip: ''
     },
-    tsTypes: {} as import('./formikValidationFormMachine.typegen').Typegen0,
+    tsTypes: {} as import('./validationFormMachine.typegen').Typegen0,
     states: {
       enteringEmail: {
         id: 'enteringEmail',
@@ -149,4 +149,4 @@ const formikValidationFormMachine = createMachine(
   }
 );
 
-export default formikValidationFormMachine;
+export default validationFormMachine;

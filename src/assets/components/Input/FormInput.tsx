@@ -1,6 +1,6 @@
 import InputProps from '../../types/InputProps';
 
-const FormikInput = ({
+const FormInput = ({
   autoComplete = 'off',
   formikError,
   formikTouched,
@@ -39,4 +39,4 @@ const FormikInput = ({
   );
 };
 
-export default FormikInput;
+export default FormInput;

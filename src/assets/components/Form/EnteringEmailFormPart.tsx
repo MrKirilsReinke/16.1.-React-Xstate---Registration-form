@@ -1,9 +1,11 @@
-import FormikProps from '../../types/FormikProps';
+import { Typegen0 } from '../../machines/validationFormMachine.typegen';
+import FormProps from '../../types/FormProps';
 import { Field } from 'formik';
 import Input from '../Input/Input';
-import FormikButton from '../Button/FormikButton';
+import Button from '../Button/Button';
 
-function EnteringEmailFormPart({ formik, send }: FormikProps) {
+
+function EnteringEmailFormPart({ formik, send }: FormProps<Typegen0>) {
   
   const validateEmail = (value: string) => {
     let error;
@@ -27,24 +29,24 @@ function EnteringEmailFormPart({ formik, send }: FormikProps) {
         name="eMail"
         type="email"
         validate={validateEmail}
-        formikError={formik.errors}
-        formikTouched={formik.touched}
+        formikError={formik?.errors}
+        formikTouched={formik?.touched}
         required={true}
       />
-      {formik.touched.eMail &&
+      {formik?.touched.eMail &&
     formik.errors.eMail ? (
           <div className="text-red-900">{formik.errors.eMail}</div>
         ) : (
-          formik.isValid && (
+          formik?.isValid && (
             <div className="grid gap-10 w-[300px] m-auto mt-2">
-              <FormikButton
+              <Button
                 onClick={() => {
                   send({
                     type: 'SUBMIT_EMAIL_ADDRESS'
                   });
                 }}>
             Next
-              </FormikButton>
+              </Button>
             </div>
           )
         )}
