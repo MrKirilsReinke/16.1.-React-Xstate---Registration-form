@@ -1,10 +1,10 @@
-import { Typegen0 } from '../../machines/validationFormMachine.typegen';
+// import { Typegen0 } from '../../machines/validationFormMachine.typegen';
 import FormProps from '../../types/FormProps';
 import FormInput from '../Input/FormInput';
 import Button from '../Button/Button';
 import { Field } from 'formik';
 
-function EnteringPersonalInfoFormPart({ formik, send }: FormProps<Typegen0>) {
+function EnteringPersonalInfoFormPart({ formik, send }: FormProps) {
   const validationWithNoDigits = (value: string) => {
     let error;
 

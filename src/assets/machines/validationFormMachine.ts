@@ -106,7 +106,7 @@ const validationFormMachine = createMachine(
         }
       },
       formSubmitted: {
-        id:'formSubmitted',
+        id: 'formSubmitted',
         on: {
           RETURN_TO_BEGINNING: {
             target: '#enteringEmail.active'

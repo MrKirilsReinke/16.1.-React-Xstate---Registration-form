@@ -10,7 +10,7 @@ const Input = ({
   onChange,
   name,
   label,
-  required,
+  required = true,
   value
 }: InputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

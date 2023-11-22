@@ -9,6 +9,6 @@ type FormValues = {
   streetAddress: string;
   city: string;
   zip: string;
-}
+};
 
 export default FormValues;

@@ -1,12 +1,10 @@
-import { Typegen0 } from '../../machines/validationFormMachine.typegen';
+// import { Typegen0 } from '../../machines/validationFormMachine.typegen';
 import FormProps from '../../types/FormProps';
 import { Field } from 'formik';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 
-
-function EnteringEmailFormPart({ formik, send }: FormProps<Typegen0>) {
-  
+function EnteringEmailFormPart({ formik, send }: FormProps) {
   const validateEmail = (value: string) => {
     let error;
 
@@ -21,7 +19,7 @@ function EnteringEmailFormPart({ formik, send }: FormProps<Typegen0>) {
   return (
     <div className="grid grid-flow-row gap-5 justify-center">
       <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300 mt-5">
-      To begin registration, enter your e-mail address.
+        To begin registration, enter your e-mail address.
       </p>
       <Field
         as={Input}
@@ -31,25 +29,23 @@ function EnteringEmailFormPart({ formik, send }: FormProps<Typegen0>) {
         validate={validateEmail}
         formikError={formik?.errors}
         formikTouched={formik?.touched}
-        required={true}
       />
-      {formik?.touched.eMail &&
-    formik.errors.eMail ? (
-          <div className="text-red-900">{formik.errors.eMail}</div>
-        ) : (
-          formik?.isValid && (
-            <div className="grid gap-10 w-[300px] m-auto mt-2">
-              <Button
-                onClick={() => {
-                  send({
-                    type: 'SUBMIT_EMAIL_ADDRESS'
-                  });
-                }}>
-            Next
-              </Button>
-            </div>
-          )
-        )}
+      {formik?.touched.eMail && formik.errors.eMail ? (
+        <div className="text-red-900">{formik.errors.eMail}</div>
+      ) : (
+        formik?.isValid && (
+          <div className="grid gap-10 w-[300px] m-auto mt-2">
+            <Button
+              onClick={() => {
+                send({
+                  type: 'SUBMIT_EMAIL_ADDRESS'
+                });
+              }}>
+              Next
+            </Button>
+          </div>
+        )
+      )}
     </div>
   );
 }

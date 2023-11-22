@@ -14,7 +14,7 @@ function FormApp() {
     services: {},
     devTools: true
   });
-  
+
   const initialValues = {
     eMail: '',
     firstName: '',
@@ -32,7 +32,7 @@ function FormApp() {
     send({
       type: 'SUBMIT_FORM_COMPLETION'
     });
-    resetForm({initialValues});
+    resetForm({ initialValues });
   };
 
   return (
@@ -50,32 +50,29 @@ function FormApp() {
                   <p className="absolute mt-1 text-sm leading-6 text-green-500 top-[0px] hidden sm:block">
                     (Current step:{JSON.stringify(currentState.value)})
                   </p>
-                  {!currentState.matches('formCompletion') ? (
-                    !currentState.matches('formSubmitted') && (
+                  {!currentState.matches('formCompletion')
+                    ? !currentState.matches('formSubmitted') && (
                       <div>
                         <div className="flex flex-col justify-center items-center gap-10 sm:gap-4 md:gap-8 lg:gap-12">
                           <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                            React/Xstate multi-step form with validation.
+                              React/Xstate multi-step form with validation.
                           </h2>
                           {currentState.matches('enteringEmail.active') && (
-                            <EnteringEmailFormPart formik={formik} send={send} /> 
+                            <EnteringEmailFormPart formik={formik} send={send} />
                           )}
                           {currentState.matches('enteringPersonalInfo.active') && (
                             <EnteringPersonalInfoFormPart formik={formik} send={send} />
                           )}
-                          {currentState.matches('enteringContactInfo') && (
+                          {currentState.matches('enteringContactInfo.active') && (
                             <EnteringContactInfoFormPart formik={formik} send={send} />
                           )}
                         </div>
                       </div>
                     )
-                  ) : (
-                    currentState.matches('formCompletion') && 
-                    <FormCompletionFormPart currentState={currentState} send={send} />
-                  )}
-                  {currentState.matches('formSubmitted') && (
-                    <FormSubmittedFormPart send={send} />
-                  )}
+                    : currentState.matches('formCompletion') && (
+                      <FormCompletionFormPart currentState={currentState} send={send} />
+                    )}
+                  {currentState.matches('formSubmitted') && <FormSubmittedFormPart send={send} />}
                   <Svg />
                 </div>
               </div>

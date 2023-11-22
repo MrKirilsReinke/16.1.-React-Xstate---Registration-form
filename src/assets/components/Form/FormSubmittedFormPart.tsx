@@ -1,16 +1,15 @@
-import { Typegen0 } from '../../machines/validationFormMachine.typegen';
+// import { Typegen0 } from '../../machines/validationFormMachine.typegen';
 import FormProps from '../../types/FormProps';
 import Button from '../Button/Button';
 
-function FormSubmittedFormPart({ send }: FormProps<Typegen0>) {
-  
+function FormSubmittedFormPart({ send }: FormProps) {
   return (
     <div className="flex flex-col justify-center items-center">
       <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-      Yoooooo!
+        Yoooooo!
       </h2>
       <p className="mx-auto max-w-xl text-center text-lg leading-8 text-gray-300">
-      Congratulations! You've successfully finished your registartion.
+        Congratulations! You've successfully finished your registartion.
       </p>
       <div className="grid gap-10 w-[300px] m-auto mt-10">
         <Button
@@ -20,7 +19,7 @@ function FormSubmittedFormPart({ send }: FormProps<Typegen0>) {
               type: 'RETURN_TO_BEGINNING'
             });
           }}>
-        Return to the beginning
+          Return to the beginning
         </Button>
       </div>
     </div>
