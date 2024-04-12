@@ -51,10 +51,10 @@ function FormCompletionFormPart({ send, currentState }: FormProps) {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3 py-10">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3 py-10 pb-0 md:pb-10">
           <div className="px-4 sm:px-0">
             <h2 className="text-start text-lg font-semibold leading-7 text-black">
-              Contact Inforamtion
+              Contact Information
             </h2>
             <p className="text-start mt-1 text-sm leading-6 text-black">
               Please, check your contact information to ensure everything is correct.
